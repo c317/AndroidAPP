@@ -183,8 +183,8 @@ public class MessageService extends Service {
 			for (int i = 0; i < newsJsonArray.length(); i++) {
 				newsObject = newsJsonArray.getJSONObject(i);
 				groupNewsDTO = new GroupNewsDTO();
-				groupNewsDTO.setGroupName(newsObject.getString(MyConfig.NEWS_GROUPNAME));
-				groupNewsDTO.setGroupName(newsObject.getString(MyConfig.NEWS_USERNAME));
+				groupNewsDTO.setGroupId(newsObject.getInt(MyConfig.NEWS_GROUPNAME));
+				groupNewsDTO.setUserName(newsObject.getString(MyConfig.NEWS_USERNAME));
 				groupNewsDTO.setContent(newsObject.getString(MyConfig.NEWS_CONTENT));
 				groupNewsDTO.setTime(newsObject.getString(MyConfig.NEWS_TIME));
 				groupNewsDTO.setRead(0);
