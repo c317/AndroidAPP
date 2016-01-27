@@ -8,13 +8,15 @@ public class GroupNewsDTO {
 	//群消息的唯一标识
 	private int id;
 	//群名
-	private String groupName;
+	private int groupId;
 	//发送该消息的用户
 	private String userName;
 	//消息正文
 	private String content;
 	//时间
 	private String time;
+	//消息类型（文字、图片、文件）
+	private int kind;
 	//是否已读
 	private boolean isRead;
 	
@@ -33,11 +35,11 @@ public class GroupNewsDTO {
 	public String getTime() {
 		return time;
 	}
-	public String getGroupName() {
-		return groupName;
+	public int getGroupId() {
+		return groupId;
 	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
 	}
 	public String getUserName() {
 		return userName;
@@ -47,6 +49,12 @@ public class GroupNewsDTO {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	public int getKind() {
+		return kind;
+	}
+	public void setKind(int kind) {
+		this.kind = kind;
 	}
 	public boolean isRead() {
 		return isRead;
