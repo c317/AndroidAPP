@@ -25,9 +25,9 @@ public class MainActivity extends Activity {
 		}else{
 			startActivity(new Intent(this, LoginAty.class));
 		}
-		Intent messageIntent = new Intent(MainActivity.this,MessageService.class);
-		startService(messageIntent);
-		finish();
+//		Intent messageIntent = new Intent(MainActivity.this,MessageService.class);
+//		startService(messageIntent);
+//		finish();
 	}
 
 

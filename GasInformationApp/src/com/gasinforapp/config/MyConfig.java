@@ -74,6 +74,7 @@ public  class MyConfig {
 	public static final String KEY_AFFAIRS_COMMENT = "comment";
 	public static final String KEY_AFFAIRS_TEXTCOMMENT = "textComment";
 	public static final String KEY_CHATS = "chats";
+	public static final String KEY_MSG_KIND = "kind";
 	
 	
 	public static final String ACTION_LOGIN = "loginAction";
@@ -88,7 +89,7 @@ public  class MyConfig {
 	public static final String ACTION_ADDMEMBERS = "addBatchMembersAction";
 	public static final String ACTION_GETALLUSER = "getAllMembersAction";
 	public static final String ACTION_PUSHNOTICE= "pushAction";
-	public static final String ACTION_SENDWORD= "sendWordsAction";
+	public static final String ACTION_SENDWORD= "chatAction";
 	public static final String ACTION_CHECKTODOLIST = "checkToDoList";
 	public static final String ACTION_CHECKTODODETAIL = "checkToDoDetail";	
 	public static final String ACTION_CHECKHAVEDONELIST = "checkHaveDoneList";
@@ -102,14 +103,21 @@ public  class MyConfig {
 	public static final String ACTION_SENDAFFAIRSREPLY = "sendAffairsReply";
 	public static final String ACTION_GETRECENTNEWS = "getRecentNews";
 	public static final String ACTION_FREGUENTQUERY = "frequentQuery";
+	
 	public static final int RESULT_STATUS_SUCCESS = 1;
 	public static final int RESULT_STATUS_FAIL = 0;
 	public static final int RESULT_STATUS_INVALID_TOKEN = 2;//token失效
 	public static final int RESULT_STATUS_NOTFOUND= 3;//没找到被操做的人
+	public static final int RESULT_STATUS_PASSWORD_ERROR= 2;//没找到被操做的人
 	public static final int RESULT_STATUS_REPEATED = 4;//重复添加
 	
 
 	public static final int ACTIVITY_RESULT_NEED_REFRESH = 10000;
+	//是否进入群聊界面标志
+	public static Boolean CHATING_FLAG = false; 
+	//消息类型
+	public static final int MSG_TEXT = 1;
+	public static final int MSG_PHOTO = 2;
 	//轮询时请求获取消息的类别
 	public static final int MODULEID_NOTICE = 1;
 	public static final int MODULEID_HOTNEWS = 2;
@@ -179,7 +187,24 @@ public  class MyConfig {
 	 */
 	public static void cachePassword(Context context,String password){
 		Editor e = context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).edit();
-		e.putString(KEY_USER_ACCOUNT, password);
+		e.putString(KEY_PASSWORD, password);
+		e.commit();
+	}
+	/**
+	 * @param context
+	 * @return 缓存userId
+	 */
+	public static int getCachedUserid(Context context){
+		return context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).getInt(KEY_USERID, 0);
+	}
+	/**
+	 * 将用户id缓存
+	 * @param context
+	 * @param userid
+	 */
+	public static void cacheUserid(Context context,int userId){
+		Editor e = context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).edit();
+		e.putInt(KEY_USERID, userId);
 		e.commit();
 	}
 }

@@ -37,7 +37,16 @@ public class Login {
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								String token = obj
 										.optString(MyConfig.KEY_TOKEN);
-								successCallback.onSuccess(token);
+								int userId = obj.optInt(MyConfig.KEY_USERID);
+								successCallback.onSuccess(token,userId);
+								break;
+							case MyConfig.RESULT_STATUS_NOTFOUND:
+								if(failCallback!=null)
+									failCallback.onFail(MyConfig.RESULT_STATUS_NOTFOUND);
+								break;
+							case MyConfig.RESULT_STATUS_PASSWORD_ERROR:
+								if(failCallback!=null)
+									failCallback.onFail(MyConfig.RESULT_STATUS_PASSWORD_ERROR);
 								break;
 							default:
 								if(failCallback!=null)
@@ -80,7 +89,7 @@ public class Login {
 	}
 
 	public interface SuccessCallback {
-		void onSuccess(String token);
+		void onSuccess(String token,int uresId);
 	}
 
 	public interface FailCallback {

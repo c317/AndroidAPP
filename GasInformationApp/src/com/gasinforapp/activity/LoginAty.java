@@ -5,13 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.gasinformationapp_101.R;
-import com.gasinforapp.config.MApplication;
 import com.gasinforapp.config.MD5Tool;
 import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyUtil;
@@ -52,41 +52,56 @@ public class LoginAty extends Activity {
 								getResources().getString(R.string.connecting),
 								getResources().getString(
 										R.string.connecting_to_server));
-//				new Login(edAccount.getText().toString(), MD5Tool
-//						.md5(edPassword.getText().toString()),
-//						new SuccessCallback() {
-//
-//							@Override
-//							public void onSuccess(String token) {
-//								pd.dismiss();
-//								
-//								MyConfig.cacheToken(LoginAty.this, token);
-//								MyConfig.cacheAccount(LoginAty.this, edAccount.getText().toString());
-//								MyConfig.cachePassword(LoginAty.this, edPassword.getText().toString());
-//								
-//								Intent intent = new Intent(LoginAty.this,HomeActivity.class);
-//								startActivity(intent);
-//								finish();
-//							}
-//						}, new FailCallback() {
-//
-//							@Override
-//							public void onFail(int ErrorCode) {
-//								pd.dismiss();
-//
-//								Toast.makeText(LoginAty.this,
-//										R.string.fail_to_login,
-//										Toast.LENGTH_LONG).show();
-//							}
-//						});
-	/** 测试用，token给为定值，不经过后台判断直接跳转至主页面*/			
-				MyConfig.cacheToken(LoginAty.this, "abcd");
-				MyConfig.cacheAccount(LoginAty.this, edAccount.getText().toString());
-				MyConfig.cachePassword(LoginAty.this, edPassword.getText().toString());
-				
-				Intent intent = new Intent(LoginAty.this,HomeActivity.class);
-				startActivity(intent);
-				finish();
+				new Login(edAccount.getText().toString(), MD5Tool
+						.md5(edPassword.getText().toString()),
+						new SuccessCallback() {
+
+							@Override
+							public void onSuccess(String token ,int userId) {
+								pd.dismiss();
+								
+								MyConfig.cacheToken(LoginAty.this, token);
+								MyConfig.cacheAccount(LoginAty.this, edAccount.getText().toString());
+								MyConfig.cachePassword(LoginAty.this, edPassword.getText().toString());
+								MyConfig.cacheUserid(LoginAty.this, userId);
+								
+								Intent intent = new Intent(LoginAty.this,StartPolling.class);
+								startActivity(intent);
+								finish();
+							}
+						}, new FailCallback() {
+
+							@Override
+							public void onFail(int ErrorCode) {
+								pd.dismiss();
+								Log.e("login", "eee");
+								switch (ErrorCode) {
+								case MyConfig.RESULT_STATUS_NOTFOUND:
+									Toast.makeText(LoginAty.this,
+										R.string.fail_to_find_user,
+										Toast.LENGTH_LONG).show();
+									break;
+								case MyConfig.RESULT_STATUS_PASSWORD_ERROR:
+									Toast.makeText(LoginAty.this,
+										R.string.login_password_error,
+										Toast.LENGTH_LONG).show();
+								default:
+									Toast.makeText(LoginAty.this,
+										R.string.generic_error,
+										Toast.LENGTH_LONG).show();
+									break;
+								}
+								
+							}
+						});
+//	/** 测试用，token给为定值，不经过后台判断直接跳转至主页面*/			
+//				MyConfig.cacheToken(LoginAty.this, "abcd");
+//				MyConfig.cacheAccount(LoginAty.this, edAccount.getText().toString());
+//				MyConfig.cachePassword(LoginAty.this, edPassword.getText().toString());
+//				
+//				Intent intent = new Intent(LoginAty.this,HomeActivity.class);
+//				startActivity(intent);
+//				finish();
 			}
 		});
 	}

@@ -61,6 +61,8 @@ public class GroupChatAty extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//进入聊天页面
+		MyConfig.CHATING_FLAG = true;
 		setContentView(R.layout.group_chat_activity);
 		// get group id
 		Intent intent = getIntent();
@@ -229,7 +231,7 @@ public class GroupChatAty extends Activity {
 		ChatItem chat = new ChatItem();
 		chat.setContent(content_str);
 		chat.setIsme(true);
-		chat.setUserName("aa");
+		chat.setUserName(MyConfig.getCachedAccount(GroupChatAty.this));
 		chat.setSendtime(time);
 		chatList.add(chat);
 		if (chatList.size() > 30) {
@@ -240,7 +242,7 @@ public class GroupChatAty extends Activity {
 		adapter.notifyDataSetChanged();
 
 		new SendWords(MyConfig.getCachedAccount(GroupChatAty.this),
-				MyConfig.getCachedToken(GroupChatAty.this), groupid,
+				MyConfig.getCachedToken(GroupChatAty.this), groupid,MyConfig.MSG_TEXT,
 				content_str, new SendWords.SuccessCallback() {
 
 					@Override
@@ -285,10 +287,10 @@ public class GroupChatAty extends Activity {
 	@SuppressLint("SimpleDateFormat")
 	private String getTime() {
 		currentTime = System.currentTimeMillis();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date curDate = new Date();
 		String str = format.format(curDate);
-		if (currentTime - oldTime >= 5000) {
+		if (currentTime - oldTime >= 500000) {
 			oldTime = currentTime;
 			return str;
 		} else {

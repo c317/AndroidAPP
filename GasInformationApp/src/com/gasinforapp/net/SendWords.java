@@ -23,7 +23,7 @@ import com.gasinforapp.config.VolleyUtil;
  */
 public class SendWords {
 	public SendWords(final String account, final String token,
-			final int groupid, final String msg,
+			final int groupid,final int kind, final String msg,
 			final SuccessCallback successCallback,
 			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST ,
@@ -80,6 +80,7 @@ public class SendWords {
 						map.put(MyConfig.KEY_USER_ACCOUNT, account);
 						map.put(MyConfig.KEY_TOKEN, token);
 						map.put(MyConfig.KEY_GROUPID, groupid+"");
+						map.put(MyConfig.KEY_MSG_KIND, kind+"");
 						map.put(MyConfig.KEY_MESSAGE,msg);
 						return map;
 					}

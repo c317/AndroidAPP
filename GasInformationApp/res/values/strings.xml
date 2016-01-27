@@ -17,6 +17,8 @@
     <string name="password_can_not_be_empty">Password can\'t be empty</string>
     <string name="fail_to_get_code">Fail to get code</string>
     <string name="fail_to_login">Fail to login,please try later</string>
+    <string name="fail_to_find_user">Account does not exist</string>
+    <string name="login_password_error">password error</string>
     <string name="fail_to_load_news_data">Fail to load news,please try later</string>
     <string name="fail_to_load_members_data">Fail to load members,please try later</string>
     <string name="fail_to_load_groups_data">Fail to load group,please try later</string>
