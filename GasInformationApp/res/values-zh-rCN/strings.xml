@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GIA</string>
+    <string name="account">帐号</string>
+    <string name="password">密码</string>
+    <string name="phone">手机号</string>
+    <string name="get_code">获取验证码</string>
+    <string name="code">验证码</string>
+    <string name="login">登陆</string>
+    <string name="publish_message">发表消息</string>
+    <string name="account_can_not_be_empty">帐号不能为空</string>
+    <string name="comment_content_can_not_be_empty">评论内容不能为空</string>
+    <string name="message_content_can_not_be_empty">消息内容不能为空</string>
+    <string name="password_can_not_be_empty">密码不能为空</string>
+    <string name="fail_to_get_code">获取验证码失败</string>
+    <string name="fail_to_login">登陆失败，请稍候重试</string>
+    <string name="fail_to_load_news_data">加载消息失败，请稍候重试</string>
+    <string name="fail_to_load_groups_data">加载群组列表失败，请稍候重试</string>
+    <string name="fail_to_load_notices_data">加载通知列表失败，请稍候重试</string>
+    <string name="fail_to_pub_comment">发表评论失败，请稍候重试</string>
+    <string name="fail_to_get_comment">获取评论失败，请稍候重试</string>
+    <string name="fail_to_publish">发表消息失败，请稍候重试</string>
+    <string name="suc_to_get_code">获取验证码成功，请查看你的短信</string>
+    <string name="suc_to_publish">发表消息成功</string>
+    <string name="connecting">正在通信</string>
+    <string name="connecting_to_server">正在与服务器通信，请稍候</string>
+    <string name="publish">发表消息</string>
+    <string name="no_internet">无网络连接~！</string>
+    <string name="generic_server_down">连接服务器失败~！</string>
+    <string name="generic_error">网络异常,请稍后再试~！</string>
+
+</resources>

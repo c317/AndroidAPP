@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">外网版</string>
+    <string name="account">Account</string>
+    <string name="password">Password</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+	<string name="phone">Phone</string>
+    <string name="get_code">Get code</string>
+    <string name="code">Code</string>
+    <string name="login">Login</string>
+    <string name="publish_message">Publish message</string>
+    <string name="account_can_not_be_empty">Account can\'t be empty</string>
+    <string name="comment_content_can_not_be_empty">Comment content can\'t be empty</string>
+    <string name="message_content_can_not_be_empty">Message content can\'t be empty</string>
+    <string name="password_can_not_be_empty">Password can\'t be empty</string>
+    <string name="fail_to_get_code">Fail to get code</string>
+    <string name="fail_to_login">Fail to login,please try later</string>
+    <string name="fail_to_load_news_data">Fail to load news,please try later</string>
+    <string name="fail_to_load_members_data">Fail to load members,please try later</string>
+    <string name="fail_to_load_groups_data">Fail to load group,please try later</string>
+    <string name="fail_to_load_notices_data">Fail to load notice,please try later</string>
+    <string name="fail_to_pub_comment">Fail to publish comment,please try later</string>
+    <string name="fail_to_get_comment">Fail to get comments,please try later</string>
+    <string name="fail_to_publish">Fail to publish message,please try later</string>
+    <string name="suc_to_get_code">Success to get code,please check your short message</string>
+    <string name="suc_to_publish">Success to publish message</string>
+    <string name="suc_to_add">Success to add new member</string>
+    <string name="suc_to_delete">Success to delete new member</string>
+    <string name="fail_to_find">cannot find this member </string>
+    <string name="re_jion">cannot find this member </string>
+    <string name="connecting">Connecting</string>
+    <string name="connecting_to_server">Connecting to server,please wait</string>
+    <string name="publish">publish</string>
+    <string name="menu_settings">Settings</string>
+    <string name="noticetopname">Notice</string>
+    <string name="invalid_token">you have not login,please login first</string>
+    
+    <string name="no_internet">No internet</string>  
+    <string name="generic_server_down">Fail to connect server</string>  
+    <string name="generic_error">Network anomaly,please try later</string>  
+</resources>

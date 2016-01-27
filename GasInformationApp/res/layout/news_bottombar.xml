@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+        android:background="@drawable/boder01"  
+    xmlns:android1="http://schemas.android.com/apk/res/android">
+    <!--可将背景色换成：       android:background="@drawable/top1_bg" -->
+
+
+        
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+            android:paddingLeft="60dp"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_horizontal"
+            android:text="收藏"
+            android:textColor="#BCBCBC"
+            android:textSize="18sp" />
+
+        </LinearLayout>
+        
+        
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_horizontal"
+            android:text="|"
+            android:textColor="#BCBCBC"
+            android:textSize="18sp" />
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+                    android:paddingRight="60dp"
+        android:orientation="horizontal">
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_horizontal"
+            android:text="分享"
+            android:textColor="#BCBCBC"
+            android:textSize="18sp" />
+</LinearLayout>
+
+</RelativeLayout>
