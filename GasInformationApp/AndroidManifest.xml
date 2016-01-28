@@ -33,6 +33,7 @@
         <activity android:name="com.gasinforapp.activity.HomeActivity"></activity>
         <activity android:name="com.gasinforapp.activity.AddMemberAty"></activity>
         <activity android:name="com.gasinforapp.activity.StartPolling"></activity>
+        <activity android:name="com.gasinforapp.activity.DownLoadTest"></activity>
         <service
             android:name="com.gasinforapp.service.MessageService"
             android:enabled="true" >

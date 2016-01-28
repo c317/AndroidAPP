@@ -24,6 +24,7 @@
         android:orientation="horizontal" >
 
     <LinearLayout
+        android:id="@+id/turn_to_download_test"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/boder02"

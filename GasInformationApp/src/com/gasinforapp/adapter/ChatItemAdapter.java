@@ -10,13 +10,13 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.gasinformationapp_101.R;
-import com.gasinforapp.bean.ChatItem;
+import com.gasinforapp.bean.GroupNewsDTO;
 
 public class ChatItemAdapter extends BaseAdapter {
 	private Context context;
-	private List<ChatItem> chatList;
+	private List<GroupNewsDTO> chatList;
 
-	public ChatItemAdapter(Context context, List<ChatItem> chatList) {
+	public ChatItemAdapter(Context context, List<GroupNewsDTO> chatList) {
 		this.context = context;
 		this.chatList = chatList;
 	}
@@ -27,7 +27,7 @@ public class ChatItemAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public ChatItem getItem(int position) {
+	public GroupNewsDTO getItem(int position) {
 		return chatList.get(position);
 	}
 
@@ -39,7 +39,7 @@ public class ChatItemAdapter extends BaseAdapter {
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		Holder holder = null;
-		ChatItem chat = chatList.get(position);
+		GroupNewsDTO chat = chatList.get(position);
 		holder = new Holder();
 		if (chat.getIsme() == true) {
 			convertView = LayoutInflater.from(context).inflate(
@@ -55,12 +55,12 @@ public class ChatItemAdapter extends BaseAdapter {
 
 		holder.tvContent.setText(chat.getContent());
 		holder.tvAccount.setText(chat.getUserName());
-		holder.tvSendtime.setText(chat.getSendtime());
+		holder.tvSendtime.setText(chat.getTime());
 
 		return convertView;
 	}
 
-	public void addAll(List<ChatItem> data) {
+	public void addAll(List<GroupNewsDTO> data) {
 		this.chatList.addAll(data);
 		notifyDataSetChanged();
 	}

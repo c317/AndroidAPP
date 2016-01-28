@@ -147,14 +147,11 @@
 <color name="navy">#000080</color><!--海军色 -->
 <color name="black">#000000</color><!--黑色 -->
 
-<color name="gray01_F2">#F2F2F2</color>
-<color name="gray02_E4">#E4E4E4</color>
-<color name="gray03_D7">#D7D7D7</color>
-<color name="gray04_C9">#C9C9C9</color>
-<color name="gray05_BC">#BCBCBC</color>
-
-
-<color name="chat_butt_off">#66CCFF</color>
+<color name="gray01_F2">#F2F2F2</color><!--黑色 -->
+<color name="gray02_E4">#E4E4E4</color><!--黑色 -->
+<color name="gray03_D7">#D7D7D7</color><!--黑色 -->
+<color name="gray04_C9">#C9C9C9</color><!--黑色 -->
+<color name="gray05_BC">#BCBCBC</color><!--黑色 -->
 
 
 </resources>

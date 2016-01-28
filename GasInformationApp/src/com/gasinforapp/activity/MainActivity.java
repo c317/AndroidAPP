@@ -18,16 +18,14 @@ public class MainActivity extends Activity {
 		String account = MyConfig.getCachedAccount(this);
 		
 		if (token!=null&&account!=null) {
-			Intent i =new Intent(this, HomeActivity.class);
-			i.putExtra(MyConfig.KEY_TOKEN, token);
-			i.putExtra(MyConfig.KEY_USER_ACCOUNT, account);
+			Intent i =new Intent(this, StartPolling.class);
 			startActivity(i);
 		}else{
 			startActivity(new Intent(this, LoginAty.class));
 		}
 //		Intent messageIntent = new Intent(MainActivity.this,MessageService.class);
 //		startService(messageIntent);
-//		finish();
+		finish();
 	}
 
 

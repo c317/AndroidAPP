@@ -125,19 +125,24 @@ public  class MyConfig {
 	//轮询的参数名
 	public static final String MOUDLEID = "moduleId";
 	public static final String LASTTIME = "time";
+	public static final String LASTTIMES = "times";
 	public static final String USERID = "userId";
+	public static final String GROUPIDS = "groupIds";
 	//轮询时解析json的键
 	public static final String NEWS_ID = "id";
 	public static final String NEWS_TITLE = "title";
 	public static final String NEWS_CONTENT = "content";
+	public static final String NEWS_KIND = "kind";
 	public static final String NEWS_PUBLISHER = "publisher";
 	public static final String NEWS_SOURCE = "source";
 	public static final String NEWS_PUBTIME = "pubTime";
 	public static final String NEWS_TIME = "time";
 	public static final String NEWS_LASTTIME = "lastTime";
 	public static final String NEWS_GROUPNAME = "groupName";
+	public static final String NEWS_GROUPID = "groupId";
 	public static final String NEWS_USERNAME = "userName";
-	
+	public static final String MESSAGE_GROUPS = "messages";
+	public static final String MESSAGE_GROUP = "message";
 	
 /**
  * @param context

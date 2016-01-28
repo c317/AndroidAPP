@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -22,17 +24,16 @@ import android.widget.Toast;
 
 import com.example.gasinformationapp_101.R;
 import com.gasinforapp.adapter.ChatItemAdapter;
-import com.gasinforapp.bean.ChatItem;
+import com.gasinforapp.bean.GroupNewsDTO;
 import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyErrorHelper;
 import com.gasinforapp.config.VolleyUtil;
-import com.gasinforapp.net.ChatList;
-import com.gasinforapp.net.ChatList.FailCallback;
-import com.gasinforapp.net.ChatList.SuccessCallback;
+import com.gasinforapp.datebase.GasInforDataBaseHelper;
 import com.gasinforapp.net.SendWords;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 
 public class GroupChatAty extends Activity {
+	private static final String TAG = "GroupChatAty";
 	/** the button trun to members list activity */
 	private Button getMembers;
 	/** the button return to the previous view */
@@ -47,22 +48,26 @@ public class GroupChatAty extends Activity {
 	/** the listview */
 	private PullToRefreshListView listView;
 	/** the data of chat list */
-	private List<ChatItem> chatList;
+	private List<GroupNewsDTO> chatList;
 	/** adapter to show data on the view */
 	private ChatItemAdapter adapter;
 	/** the page number of the list */
 	private int pageNum = 1;
+	/** the numsPerPage in one page */
+	private int numsPerPage =10;
 	/** the button of send word */
 	private Button btn_sendword;
 	/** get send word from the edittext */
 	private EditText editText;
 	private double currentTime = 0, oldTime = 0;
-
+	private GasInforDataBaseHelper dataBaseHelper;
+	private Handler myHandler;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		//进入聊天页面
 		MyConfig.CHATING_FLAG = true;
+		dataBaseHelper = GasInforDataBaseHelper.getDatebaseHelper(GroupChatAty.this);
 		setContentView(R.layout.group_chat_activity);
 		// get group id
 		Intent intent = getIntent();
@@ -70,46 +75,14 @@ public class GroupChatAty extends Activity {
 		groupid = bundle.getInt(MyConfig.KEY_GROUPID);
 		// 初始化控件
 		findAllView();
-		chatList = new ArrayList<ChatItem>();
-		// //////////////以下是测试数据////////////////
-		ChatItem c1 = new ChatItem();
-		c1.setContent("233333");
-		c1.setSendtime("01:01");
-		c1.setUserName("zz");
-		chatList.add(c1);
-		ChatItem c2 = new ChatItem();
-		c2.setContent("233333");
-		c2.setSendtime("01:01");
-		c2.setUserName("zz");
-		chatList.add(c2);
-		ChatItem c3 = new ChatItem();
-		c3.setContent("233333");
-		c3.setSendtime("01:01");
-		c3.setUserName("zz");
-		chatList.add(c3);
-		ChatItem c4 = new ChatItem();
-		c4.setContent("233333");
-		c4.setSendtime("01:01");
-		c4.setUserName("zz");
-		chatList.add(c4);
-		ChatItem c5 = new ChatItem();
-		c5.setContent("233333");
-		c5.setSendtime("01:01");
-		c5.setUserName("zz");
-		chatList.add(c5);
-		ChatItem c6 = new ChatItem();
-		c6.setContent("233333");
-		c6.setSendtime("01:01");
-		c6.setUserName("zz");
-		chatList.add(c6);
-		// //////////////以上是测试数据////////////////
+		chatList = new ArrayList<GroupNewsDTO>();
 		adapter = new ChatItemAdapter(this, chatList);
 		ListView actuaListView = listView.getRefreshableView();
 		actuaListView.setAdapter(adapter);
-
-		setTopbar();
-		loadChats();
+		setTopbar();		
 		setOnListener();
+		myHandler = new MyHandler();
+		loadChats(pageNum*numsPerPage);
 	}
 
 	private void findAllView() {
@@ -120,6 +93,7 @@ public class GroupChatAty extends Activity {
 		editText = (EditText) findViewById(R.id.et_sendwords);
 		btn_sendword = (Button) findViewById(R.id.button_sendchat);
 	}
+	
 
 	/** 配置topbar */
 	private void setTopbar() {
@@ -149,60 +123,47 @@ public class GroupChatAty extends Activity {
 	}
 
 	/** 加载聊天列表 */
-	private void loadChats() {
-		new ChatList(MyConfig.getCachedAccount(GroupChatAty.this),
-				MyConfig.getCachedToken(GroupChatAty.this), groupid, pageNum,
-				new SuccessCallback() {
-					@SuppressWarnings("unchecked")
-					@Override
-					public void onSuccess(List<ChatItem> chats) {
-						new AsyncTask<List<ChatItem>, Void, List<ChatItem>>() {
-
-							@Override
-							protected List<ChatItem> doInBackground(
-									List<ChatItem>... cLists) {
-								return cLists[0];
-							}
-
-							@Override
-							protected void onPostExecute(List<ChatItem> result) {
-								super.onPostExecute(result);
-								chatList = result;
-								adapter.clear();
-								adapter.addAll(result);
-								listView.onRefreshComplete();
-							}
-						}.execute(chats);
+	private void loadChats(int nums) {
+		//加载已读信息
+		chatList = dataBaseHelper.queryMultiGroupNewsRead(groupid,nums);
+		if(chatList.size()>0){
+			adapter.clear();
+			adapter.addAll(chatList);
+			listView.onRefreshComplete();
+		}
+		//开启线程加载未读信息
+		new Thread(){
+			@Override
+			public void run() {
+				while(MyConfig.CHATING_FLAG){
+					List<GroupNewsDTO> list = dataBaseHelper.queryMultiGroupNewsUnRead(groupid);
+					if(list.size()>0){
+						chatList.addAll(list);
+						myHandler.sendEmptyMessage(1);
+						try {
+							sleep(500);
+						} catch (InterruptedException e) {
+							Log.e(TAG, "sleep error!");
+							e.printStackTrace();
+						}
 					}
-				}, new FailCallback() {
-
-					@Override
-					public void onFail(int ErrorCode) {
-						new AsyncTask<Integer, Void, Integer>() {
-
-							@Override
-							protected Integer doInBackground(
-									Integer... errorCode) {
-								return errorCode[0];
-							}
-
-							@Override
-							protected void onPostExecute(Integer result) {
-								Log.e("tag", VolleyErrorHelper.getMessage(
-										result, GroupChatAty.this));
-								Toast.makeText(GroupChatAty.this,
-										R.string.generic_error,
-										Toast.LENGTH_LONG).show();
-								super.onPostExecute(result);
-							}
-
-						}.execute(ErrorCode);
-					}
-
-				});
-
+				}
+			}
+		}.start();
 	}
+	
+	class MyHandler extends Handler{
 
+		@Override
+		public void handleMessage(Message msg) {
+			adapter.clear();
+			adapter.addAll(chatList);
+			listView.onRefreshComplete();
+			//更新未读为已读
+			dataBaseHelper.updataGroupNews(groupid);
+		}
+		
+	}
 	/** 监听事件 */
 	private void setOnListener() {
 		// 发送聊天内容
@@ -226,14 +187,6 @@ public class GroupChatAty extends Activity {
 
 	/** 发送聊天消息 */
 	private void sendWords(String content_str) {
-		final String time = getTime();
-
-		ChatItem chat = new ChatItem();
-		chat.setContent(content_str);
-		chat.setIsme(true);
-		chat.setUserName(MyConfig.getCachedAccount(GroupChatAty.this));
-		chat.setSendtime(time);
-		chatList.add(chat);
 		if (chatList.size() > 30) {
 			for (int i = 0; i < chatList.size(); i++) {
 				chatList.remove(i);
@@ -282,28 +235,13 @@ public class GroupChatAty extends Activity {
 					}
 				});
 	}
-
-	// 得到系统时间
-	@SuppressLint("SimpleDateFormat")
-	private String getTime() {
-		currentTime = System.currentTimeMillis();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		Date curDate = new Date();
-		String str = format.format(curDate);
-		if (currentTime - oldTime >= 500000) {
-			oldTime = currentTime;
-			return str;
-		} else {
-			return "";
-		}
-
-	}
-
 	@Override
 	protected void onStop() {
 		super.onStop();
-		VolleyUtil.getRequestQueue().cancelAll("getChatList");
 		VolleyUtil.getRequestQueue().cancelAll("sendWordsPost");
+		MyConfig.CHATING_FLAG = false;
 	}
+	
+     
 
 }

@@ -2,6 +2,7 @@ package com.gasinforapp.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.json.JSONArray;
@@ -12,12 +13,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.gasinforapp.bean.Group;
 import com.gasinforapp.bean.GroupNewsDTO;
 import com.gasinforapp.bean.HotNewsDTO;
 import com.gasinforapp.bean.NoticeDTO;
 import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyUtil;
 import com.gasinforapp.datebase.GasInforDataBaseHelper;
+import com.gasinforapp.net.GroupList;
 import com.gasinforapp.net.NetStatus;
 import android.app.Service;
 import android.content.Intent;
@@ -28,6 +31,7 @@ public class MessageService extends Service {
 	private static final String TAG = "MessageService";
 	private NetStatus netStatus;
 	private GasInforDataBaseHelper dataBaseHelper;
+	private static int groupIds[];
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -43,38 +47,63 @@ public class MessageService extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {// 重写onStartCommand方法
 		netStatus = new NetStatus(MessageService.this);
-		dataBaseHelper = GasInforDataBaseHelper
-				.getDatebaseHelper(MessageService.this);
-		startQueryThread();// 调用方法启动线程
+		dataBaseHelper = GasInforDataBaseHelper.getDatebaseHelper(MessageService.this);
+		getGroupIds();
 		return super.onStartCommand(intent, flags, startId);
 	}
+	/**
+	 * 得到该用户所有所在群的id，第三个参数使这里只能得到规定页码的群数量
+	 */
+	private void getGroupIds(){
+		new GroupList(MyConfig.getCachedAccount(this), MyConfig.getCachedToken(this), 1, 0, new GroupList.SuccessCallback() {
+			@Override
+			public void onSuccess(int page, int perpage, List<Group> groupList) {
+				int groupIds[] = new int[groupList.size()];
+				for(int i = 0 ; i< groupList.size() ; i++){
+					groupIds[i] = groupList.get(i).getGroupID();
+					Log.i(TAG, "groupIds:" + groupIds[i]);
+				}
+				startQueryThread(groupIds);// 调用方法启动线程
+			}
+		}, new GroupList.FailCallback() {
+			@Override
+			public void onFail(int errorCode) {
+				Log.e(TAG, "未得到grouplist");
+				getGroupIds();
+			}
+		});
+	}
+	/**
+	 * 启动轮询线程
+	 * @param groupIds 用户所属群的所有群Id
+	 */
 
-	public void startQueryThread() {
+	public void startQueryThread(final int[] groupIds) {
 		new Thread() {
 			private String lastTimeOfNotice;
 			private String lastTimeOfHotNews;
 			private String lastTimeOfGroupNews;
-
 			public void run() {
 				while (true) {
 					if (netStatus.getNetWorkStatus()) {
-						try {// 睡眠一段时间
-							Thread.sleep(5000);
+						try {
+							lastTimeOfNotice = dataBaseHelper.getLastTimeOfNotice();
 							Log.i(TAG, "lastTimeOfNotice:" + lastTimeOfNotice);
-							lastTimeOfNotice = dataBaseHelper
-									.getLastTimeOfNotice();
-							frequentQuery(
-									MyConfig.MODULEID_NOTICE,
-									lastTimeOfNotice,
-									MyConfig.getCachedUserid(MessageService.this));
-							lastTimeOfHotNews = dataBaseHelper
-									.getLastTimeOfHotNews();
+							frequentQuery(MyConfig.MODULEID_NOTICE,null,lastTimeOfNotice,MyConfig.getCachedUserid(getApplicationContext()));
+							
+							lastTimeOfHotNews = dataBaseHelper.getLastTimeOfHotNews();
 							Log.i(TAG, "lastTimeOfHotNews:" + lastTimeOfHotNews);
-							frequentQuery(MyConfig.MODULEID_HOTNEWS,
-									lastTimeOfHotNews, -1);
-							// lastTimeOfGroupNews =
-							// dataBaseHelper.getLastTimeOfGroupNews();
-							// frequentQuery(MyConfig.MODULEID_GROUPNEWS,lastTimeOfGroupNews);
+							frequentQuery(MyConfig.MODULEID_HOTNEWS,null,lastTimeOfHotNews, null);
+							
+							String groupIdString = "";
+							for(int i=0;i<groupIds.length;i++){
+								groupIdString = groupIdString +groupIds[i]+",";
+							}
+							groupIdString = groupIdString.substring(0, groupIdString.length()-1);
+							lastTimeOfGroupNews =dataBaseHelper.getLastTimeOfGroupNews(groupIds);
+							Log.i(TAG, "lastTimeOfGroupNews:" + lastTimeOfGroupNews+"  groupIdString:"+groupIdString);
+							frequentQuery(MyConfig.MODULEID_GROUPNEWS,groupIdString,lastTimeOfGroupNews,null);
+							Thread.sleep(5000);
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -89,15 +118,13 @@ public class MessageService extends Service {
 	}
 
 	/**
-	 * 轮询
 	 * 
 	 * @param moduleId
+	 * @param groupIds 为null时表示该接口不需要groupIds参数
 	 * @param lastTime
-	 * @param userId
-	 *            为-1时表示该接口不需要userId参数
+	 * @param userId 为null时表示该接口不需要userId参数
 	 */
-	public void frequentQuery(final int moduleId, final String lastTime,
-			final int userId) {
+	public void frequentQuery(final int moduleId, final String groupIds, final String lastTime,final Integer userId) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL + MyConfig.ACTION_FREGUENTQUERY,
 				new Response.Listener<String>() {
@@ -109,16 +136,13 @@ public class MessageService extends Service {
 							if (obj.getInt(MyConfig.KEY_STATUS) == MyConfig.RESULT_STATUS_SUCCESS) {
 								switch (moduleId) {
 								case MyConfig.MODULEID_NOTICE:
-									analyzeJsonData(MyConfig.MODULEID_NOTICE,
-											obj);
+									analyzeJsonData(MyConfig.MODULEID_NOTICE,obj);
 									break;
 								case MyConfig.MODULEID_HOTNEWS:
-									analyzeJsonData(MyConfig.MODULEID_HOTNEWS,
-											obj);
+									analyzeJsonData(MyConfig.MODULEID_HOTNEWS,obj);
 									break;
 								case MyConfig.MODULEID_GROUPNEWS:
-									analyzeJsonData(
-											MyConfig.MODULEID_GROUPNEWS, obj);
+									analyzeJsonData(MyConfig.MODULEID_GROUPNEWS, obj);
 									break;
 								default:
 									break;
@@ -141,9 +165,14 @@ public class MessageService extends Service {
 				// 在这里设置需要的参数
 				Map<String, String> map = new HashMap<String, String>();
 				map.put(MyConfig.MOUDLEID, moduleId + "");
-				map.put(MyConfig.LASTTIME, lastTime);
-				if (moduleId == MyConfig.MODULEID_NOTICE) {
+				if (moduleId == MyConfig.MODULEID_HOTNEWS) {
+					map.put(MyConfig.LASTTIME, lastTime);
+				}else if (moduleId == MyConfig.MODULEID_NOTICE) {
 					map.put(MyConfig.USERID, userId + "");
+					map.put(MyConfig.LASTTIME, lastTime);
+				}else if(moduleId == MyConfig.MODULEID_GROUPNEWS){
+					map.put(MyConfig.GROUPIDS, groupIds);
+					map.put(MyConfig.LASTTIMES, lastTime);
 				}
 				return map;
 			}
@@ -203,14 +232,15 @@ public class MessageService extends Service {
 			break;
 		case MyConfig.MODULEID_GROUPNEWS:
 			ArrayList<GroupNewsDTO> groupNewsDTOs = new ArrayList<GroupNewsDTO>();
-			newsJsonArray = obj.getJSONArray(MyConfig.KEY_NEWS);
+			newsJsonArray = obj.getJSONArray(MyConfig.MESSAGE_GROUPS);
 			GroupNewsDTO groupNewsDTO;
 			for (int i = 0; i < newsJsonArray.length(); i++) {
 				newsObject = newsJsonArray.getJSONObject(i);
 				groupNewsDTO = new GroupNewsDTO();
-				groupNewsDTO.setGroupId(newsObject.getInt(MyConfig.NEWS_GROUPNAME));
+				groupNewsDTO.setGroupId(newsObject.getInt(MyConfig.NEWS_GROUPID));
 				groupNewsDTO.setUserName(newsObject.getString(MyConfig.NEWS_USERNAME));
-				groupNewsDTO.setContent(newsObject.getString(MyConfig.NEWS_CONTENT));
+				groupNewsDTO.setContent(newsObject.getString(MyConfig.MESSAGE_GROUP));
+				groupNewsDTO.setKind(newsObject.getInt(MyConfig.NEWS_KIND));
 				groupNewsDTO.setTime(newsObject.getString(MyConfig.NEWS_TIME));
 				groupNewsDTO.setRead(0);
 				groupNewsDTOs.add(groupNewsDTO);

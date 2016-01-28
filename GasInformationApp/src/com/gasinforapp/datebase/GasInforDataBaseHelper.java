@@ -409,8 +409,8 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 				cv.put(GROUPMESSAGE_KIND, newmessage.getKind());
 				cv.put(GROUPMESSAGE_ISREAD, newmessage.getReadStatus());
 				db.insert(GROUPMESSAGE_TABLENAME, null, cv);
-
 			}
+			
 			db.setTransactionSuccessful();
 		} catch (Exception e) {
 			Log.e(TAG, "", e);
@@ -422,9 +422,11 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * 查询多条已读群消息
 	 */
-	public List<GroupNewsDTO> queryMultiGroupNewsUnread(int counts) {
+	public List<GroupNewsDTO> queryMultiGroupNewsRead(int groupId,int counts) {
 		ArrayList<GroupNewsDTO> messages = new ArrayList<GroupNewsDTO>();
-		Cursor cursor = db.query(GROUPMESSAGE_TABLENAME, null, null, null,null, null, ORDER + " ASC limit 0," + counts);
+		String where = GROUPMESSAGE_GROUPID + " =? and "+ GROUPMESSAGE_ISREAD + " =?";
+		String[] whereValue = { groupId+"","1" };
+		Cursor cursor = db.query(GROUPMESSAGE_TABLENAME, null, where, whereValue,null, null, ORDER + " ASC limit 0," + counts);
 		if (cursor.getCount() == 0) {
 			cursor.close();
 			return messages;
@@ -448,9 +450,11 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	/**
 	 * 查询所有未读群消息
 	 */
-	public List<GroupNewsDTO> queryMultiGroupNewsRead() {
+	public List<GroupNewsDTO> queryMultiGroupNewsUnRead(int groupId) {
 		ArrayList<GroupNewsDTO> messages = new ArrayList<GroupNewsDTO>();
-		Cursor cursor = db.query(GROUPMESSAGE_TABLENAME, null, null, null,
+		String where = GROUPMESSAGE_GROUPID + " =? and "+ GROUPMESSAGE_ISREAD + " =?";
+		String[] whereValue = { groupId+"", "0" };
+		Cursor cursor = db.query(GROUPMESSAGE_TABLENAME, null, where, whereValue,
 				null, null, ORDER + " ASC");
 		if (cursor.getCount() == 0) {
 			cursor.close();
@@ -494,20 +498,21 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	 * 更新群所有未读消息为已读
 	 */
 	public int updataGroupNews(int groupId) {
-		String where = GROUPMESSAGE_GROUPID + " =? ";
+		String where = GROUPMESSAGE_GROUPID + " =? and "+GROUPMESSAGE_ISREAD+"=0";
 		String[] whereValue = { groupId + "" };
 		ContentValues cv = new ContentValues();
-		cv.put(HOTNEWS_ISREAD, "1");
-		return db.update(HOTNEWS_TABLENAME, cv, where, whereValue);
+		cv.put(GROUPMESSAGE_ISREAD, "1");
+		return db.update(GROUPMESSAGE_TABLENAME, cv, where, whereValue);
 	}
 
 	/**
 	 * 查询各个群消息的最近一条消息创建的时间
 	 * 注意：因查询语句过于复杂，为了方便阅读，此处没有使用表和字段的常量代替
 	 */
-	public Map<Integer, String> getLastTimeOfGroupNews(int[] groupIds) {
+	public String getLastTimeOfGroupNews(int[] groupIds) {
 		Map<Integer, String> map = new HashMap<Integer, String>();
-		String sql = "select groupId,time from groupmessge,(select groupId,max(_id)_id from groupmessage group by groupId)temp where groupmessage._id = temp._id";
+		String lastTimes="";
+		String sql = "select groupmessage.groupId,groupmessage.time from groupmessage,(select groupId,max(_id)_id from groupmessage group by groupId)temp where groupmessage._id = temp._id";
 		Cursor cursor = db.rawQuery(sql, null);
 		if (cursor.getCount() != 0) {
 			cursor.moveToFirst();
@@ -519,10 +524,13 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 		}
 		for(int i=0;i<groupIds.length;i++){
 			if(map.get(groupIds[i])==null){
-				map.put(groupIds[i], "2016-01-01 00:00:00");
+				lastTimes = lastTimes +"2016-01-01 00:00:00,";
+			}else{
+				lastTimes = lastTimes +map.get(groupIds[i])+",";
 			}
 		}
-		return map;
+		lastTimes = lastTimes.substring(0, lastTimes.length()-1);
+		return lastTimes;
 	}
 	/**
 	 * 获取所有群的未读消息数目

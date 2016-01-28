@@ -13,24 +13,11 @@ public class StartPolling extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent messageIntent = new Intent(StartPolling.this,MessageService.class);
-		startService(messageIntent);
+		startService(messageIntent);					
+		Intent intent = new Intent(StartPolling.this,HomeActivity.class);
+		startActivity(intent);
 		finish();
-		new AsyncTask<Void, Void, Void>(){
-
-			@Override
-			protected Void doInBackground(Void... arg0) {
-				try {
-					Thread.sleep(3000);
-					Intent intent = new Intent(StartPolling.this,HomeActivity.class);
-					startActivity(intent);
-					finish();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				return null;
-			}
-			
-		}.execute();
+		
 	}
 
 }
