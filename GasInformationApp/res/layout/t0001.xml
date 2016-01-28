@@ -1,841 +1,775 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#FAFAFA"
-    >
-<LinearLayout 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#FFFFFF"
-    android:orientation="vertical" >
+    android:background="#FAFAFA" >
 
-
-    
     <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:id="@+id/turn_to_download_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:orientation="horizontal" >
-            
-
-
+        android:background="#FFFFFF"
+        android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_width="258dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-        	    android:paddingBottom="8dp"
-                android:text="矿产开发冬季项目结题批示"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="申请人:丁锋"
-                        android:textColor="#A6A6A6" />
-                    
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="矿产开发室"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-
-        
-</LinearLayout>
-    
-</LinearLayout>
-<LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
-
-        <LinearLayout
-            android:layout_width="258dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
                 android:paddingBottom="8dp"
-                android:text="矿产储量室设备更新请示"
-                android:layout_marginLeft="3dp"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="8dp" >
 
                 <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
 
-                    <TextView
+                    <Button
+                        android:id="@+id/turn_to_download_test"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="申请人:孟刚"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="矿产开发冬季项目结题批示"
+                        android:textColor="#282828"
+                        android:background="#ffffff"
+                        android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="矿产储量室"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:丁锋"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="矿产开发室"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        
-</LinearLayout>
-    
-</LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-				android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:paddingBottom="8dp"
-                android:text="油气监督室人员调动请示"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="申请人:马克"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="油气监督室"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-            </LinearLayout>
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
         </LinearLayout>
-
-        
-</LinearLayout>
-    
-</LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:paddingBottom="8dp"
-                android:layout_weight="1"
-                android:text="总工程师室A00125号项目经费申请"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
 
                 <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="申请人:叶晗"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="矿产储量室设备更新请示"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="总工程师室"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:孟刚"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="矿产储量室"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        
-</LinearLayout>
-    
-</LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-        	    android:paddingBottom="8dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:text="2015年度年终奖金核实请示"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="申请人:王楠"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="财务资金处"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-            </LinearLayout>
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
         </LinearLayout>
-
-        
-</LinearLayout>
-    
-</LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-        	    android:paddingBottom="8dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:text="2015年度党群工作汇报请示"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
 
                 <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="申请人:申雪"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="油气监督室人员调动请示"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="党群工作处"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:马克"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="油气监督室"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
-        
-</LinearLayout>
- </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-        	    android:paddingBottom="8dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:text=" 2016年01月人事调动核实请示"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="申请人:梅丹"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="人事处        "
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-            </LinearLayout>
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
         </LinearLayout>
-
-        
-</LinearLayout>
-
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="0"
-        android:background="#F8F8FF"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
-    
-    <LinearLayout
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"             
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:orientation="horizontal" >
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/boder02"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="4dp"
-        android:orientation="horizontal" >
-            
-
-
 
         <LinearLayout
-            android:layout_width="258dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-        	    android:paddingBottom="8dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="3dp"
-                android:text="设备保养费申请"
-                android:textColor="#282828"
-                android:textSize="18sp" />
-
-            
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:orientation="horizontal" >
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
 
                 <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="申请人:郭晶"
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="总工程师室A00125号项目经费申请"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center" >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="办公室        "
-                        android:textColor="#A6A6A6" />
-                </LinearLayout>
-                
-               <LinearLayout
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="left" >
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="2016-01-10"
-                        android:textColor="#A6A6A6" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:叶晗"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="总工程师室"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 
-        
-</LinearLayout>
-</LinearLayout>
-    
-</LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
+
+                <LinearLayout
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="2015年度年终奖金核实请示"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:王楠"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="财务资金处"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
+
+                <LinearLayout
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="2015年度党群工作汇报请示"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:申雪"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="党群工作处"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
+
+                <LinearLayout
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text=" 2016年01月人事调动核实请示"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:梅丹"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="人事处        "
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_weight="0"
+            android:background="#F8F8FF"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingTop="4dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/boder02"
+                android:orientation="horizontal"
+                android:paddingBottom="4dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="4dp" >
+
+                <LinearLayout
+                    android:layout_width="258dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="2dp"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="8dp"
+                        android:text="设备保养费申请"
+                        android:textColor="#282828"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="申请人:郭晶"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="办公室        "
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="3dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="left" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="3dp"
+                                android:text="2016-01-10"
+                                android:textColor="#A6A6A6" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

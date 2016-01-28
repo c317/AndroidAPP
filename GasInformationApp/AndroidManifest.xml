@@ -7,8 +7,12 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name="com.gasinforapp.config.MApplication"
         android:allowBackup="true"
@@ -23,17 +27,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>        
-        <activity android:name="com.gasinforapp.activity.NewsContentAty"></activity>
-        <activity android:name="com.gasinforapp.activity.NoticeContentAty"></activity>
-        <activity android:name="com.gasinforapp.activity.NoticeListAty"></activity>
-        <activity android:name="com.gasinforapp.activity.LoginAty"></activity>
-        <activity android:name="com.gasinforapp.activity.GroupMembersAty"></activity>
-        <activity android:name="com.gasinforapp.activity.GroupChatAty"></activity>
-        <activity android:name="com.gasinforapp.activity.HomeActivity"></activity>
-        <activity android:name="com.gasinforapp.activity.AddMemberAty"></activity>
-        <activity android:name="com.gasinforapp.activity.StartPolling"></activity>
-        <activity android:name="com.gasinforapp.activity.DownLoadTest"></activity>
+        </activity>
+        <activity android:name="com.gasinforapp.activity.NewsContentAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.NoticeContentAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.NoticeListAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.LoginAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.GroupMembersAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.GroupChatAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.HomeActivity" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.AddMemberAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.StartPolling" >
+        </activity>
+        <activity android:name="com.gasinforapp.downloadtest.DownLoadTest" >
+        </activity>
+
         <service
             android:name="com.gasinforapp.service.MessageService"
             android:enabled="true" >

@@ -101,7 +101,7 @@ public class Download {
             //创建文件  
             file.createNewFile();  
             fos = new FileOutputStream(file);  
-            byte[] buf = new byte[1024]; 
+            byte[] buf = new byte[1024];
             int len = 0;
             while ((len = is.read(buf) )!= -1) {  
                 fos.write(buf,0,len);

@@ -29,6 +29,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class DownLoadTest extends Activity {
 	private Button btn_down;
@@ -41,10 +42,9 @@ public class DownLoadTest extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.download);
 		btn_down = (Button) findViewById(R.id.btn_download);
-		btn_openfile = (Button) findViewById(R.id.btn_openfile);
-		btn_openphoto = (Button) findViewById(R.id.btn_openphoto);
 		iv_test = (ImageView) findViewById(R.id.iv_test);
-
+		
+		byvolley();
 		// 获取传递的Intent的Bundle的url键值
 		final String url = "http://192.168.0.115:8080/GasInformationAppS/work/download?fileName=a.png";
 //		final String url = "http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg";
@@ -53,26 +53,14 @@ public class DownLoadTest extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				down(url);
-				MediaScannerConnection.scanFile(DownLoadTest.this, new String[]{"/storage/emulated/0/download/1.png"}, null, null);
-			}
-		});
-		btn_openfile.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				iv_test.setImageBitmap(getImageThumbnail("/storage/emulated/0/download/1.png", 200, 200)); //下载到sd卡
-//				byvolley();
-			}
-		});
-		btn_openphoto.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
+				MediaScannerConnection.scanFile(DownLoadTest.this, new String[]{"/storage/emulated/0/down/a.png"}, null, null);
+				Toast.makeText(DownLoadTest.this, "下载完成", Toast.LENGTH_LONG).show();
 				Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
 				albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
 				startActivityForResult(albumIntent,1);
 			}
 		});
+
 	}
 
 	private void down(final String url) {
@@ -86,7 +74,7 @@ public class DownLoadTest extends Activity {
 				 * 下载文件到sd卡，虚拟设备必须要开始设置sd卡容量
 				 * downhandler是Download的内部类，作为回调接口实时显示下载数据
 				 */
-				int status = dl.down2sd("download/", "1.png",
+				int status = dl.down2sd("down/", "a.png",
 						dl.new downhandler() {
 							@Override
 							public void setSize(int size) {
@@ -129,7 +117,7 @@ public class DownLoadTest extends Activity {
 	private void byvolley() {
 		RequestQueue requestQueue = Volley.newRequestQueue(DownLoadTest.this);
 	    ImageRequest imageRequest = new ImageRequest(  
-	    		"http://img.my.csdn.net/uploads/201404/13/1397393290_5765.jpeg",  
+	    		"http://192.168.0.115:8080/GasInformationAppS/work/download?fileName=a.png",  
 	            new Response.Listener<Bitmap>() {  
 	                @Override  
 	                public void onResponse(Bitmap response) {  
