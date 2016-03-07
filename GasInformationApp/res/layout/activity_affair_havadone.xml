@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+<include layout="@layout/topbar_affaircontent"/>
+<TextView
+    android:id="@+id/tv_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="title"
+    />
+<TextView
+    android:id="@+id/tv_applicant"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="applicant"
+    />
+<TextView
+    android:id="@+id/tv_department"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="department"
+    />
+<TextView
+    android:id="@+id/tv_pubtime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="time"
+    />
+<TextView
+    android:id="@+id/tv_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="content"
+    />
+
+
+     <Button
+        android:id="@+id/btn_download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="附件" /> 
+</LinearLayout>

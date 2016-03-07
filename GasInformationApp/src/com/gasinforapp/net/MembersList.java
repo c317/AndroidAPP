@@ -22,6 +22,7 @@ import com.gasinforapp.config.VolleyUtil;
 
 /**
  *  获取用户列表接口
+ *  包括群用户列表，未进群用户列表，领导列表
  * 
  * @author zm
  * 
@@ -207,6 +208,98 @@ public class MembersList {
 				map.put(MyConfig.KEY_USER_ACCOUNT, account);
 				map.put(MyConfig.KEY_TOKEN, token);
 				map.put(MyConfig.KEY_GROUPID, groupID + "");
+				return map;
+			}
+			
+		};
+		System.out.println(stringRequest.getUrl());
+		stringRequest.setTag("getMemberListPost");
+		VolleyUtil.getRequestQueue().add(stringRequest);
+	}
+	/**
+	 * get leader list 
+	 * @param account
+	 * @param token
+	 * @param successCallback
+	 * @param failCallback
+	 */
+	public MembersList(final String account, final String token,
+			final SuccessCallback successCallback,
+			final FailCallback failCallback) {
+		StringRequest stringRequest = new StringRequest(Request.Method.POST,
+				MyConfig.SERVER_URL_WORK + MyConfig.ACTION_GETLEADER,
+				new Response.Listener<String>() {
+			
+			@Override
+			public void onResponse(String response) {
+				System.out.println(response);
+				try {
+					JSONObject object = new JSONObject(response);
+					switch (object.getInt(MyConfig.KEY_STATUS)) {
+					case MyConfig.RESULT_STATUS_SUCCESS:
+						List<User> memberList = new ArrayList<User>();
+						JSONArray memArray = object
+								.optJSONArray(MyConfig.KEY_LEADERS);
+						for (int i = 0; i < memArray.length(); i++) {
+							JSONObject obj = memArray.getJSONObject(i);
+							String userName = obj
+									.optString(MyConfig.KEY_USERNAME);
+							String userAccount = obj
+									.optString(MyConfig.KEY_USER_ACCOUNT);
+							int userid = obj
+									.optInt(MyConfig.KEY_USERID);
+							String department = obj
+									.optString(MyConfig.KEY_DEPARTMENT);
+							String job = obj
+									.optString(MyConfig.KEY_JOB);
+							
+							User us = new User();
+							us.setUserID(userid);
+							us.setDepartment(department);
+							us.setJob(job);
+							us.setAccount(userAccount);
+							us.setUserName(userName);
+							
+							memberList.add(us);
+						}
+						successCallback.onSuccess(memberList);
+						
+						break;
+					default:
+						if (failCallback != null)
+							failCallback
+							.onFail(MyConfig.RESULT_STATUS_FAIL);
+						break;
+					}
+					
+				} catch (JSONException e) {
+					Log.e("errortag", "jsonLeaderlist");
+					e.printStackTrace();
+					if (failCallback != null) {
+						failCallback
+						.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}
+				
+			}
+		}, new Response.ErrorListener() {
+			
+			@Override
+			public void onErrorResponse(VolleyError error) {
+				Log.e("LeaderlistTag", error.getMessage());
+				if (failCallback != null) {
+					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+				}
+			}
+		}) {
+			/**
+			 * post请求参数
+			 */
+			@Override
+			protected Map<String, String> getParams() throws AuthFailureError {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put(MyConfig.KEY_USER_ACCOUNT, account);
+				map.put(MyConfig.KEY_TOKEN, token);
 				return map;
 			}
 			

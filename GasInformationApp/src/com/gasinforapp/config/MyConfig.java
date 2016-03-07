@@ -55,6 +55,7 @@ public  class MyConfig {
 	public static final String KEY_DEPARTMENT=  "department"; 
 	public static final String KEY_JOB = "job"; 
 	public static final String KEY_MEMBERS = "users"; 
+	public static final String KEY_LEADERS = "phoneUsers"; 
 	public static final String KEY_MEMBERSID = "memberid"; 
 	public static final String KEY_MEMBERSIDS = "memberids"; 
 	public static final String KEY_MEMBERSACCOUNT = "memberaccount"; 
@@ -107,6 +108,7 @@ public  class MyConfig {
 	public static final String ACTION_MANAGEMEMBERS= "manageMemberAction";
 	public static final String ACTION_ADDMEMBERS = "addBatchMembersAction";
 	public static final String ACTION_GETALLUSER = "getAllMembersAction";
+	public static final String ACTION_GETLEADER = "getAllLeaders";
 	public static final String ACTION_PUSHNOTICE= "pushAction";
 	public static final String ACTION_SENDWORD= "chatAction";
 	public static final String ACTION_CHECKTODOLIST = "checkToDoList";
@@ -119,7 +121,7 @@ public  class MyConfig {
 	public static final String ACTION_CHECKOFFICEREPLYDETAIL = "checkOfficeReplyDetail";
 	public static final String ACTION_SENDAFFAIRSREQUEST = "sendOfficeRequest";
 	public static final String ACTION_RESENDAFFAIRSREQUEST = "resendAffairsRequest";
-	public static final String ACTION_SENDAFFAIRSREPLY = "sendAffairsReply";
+	public static final String ACTION_SENDAFFAIRSREPLY = "examineOfficeRequest";
 	public static final String ACTION_GETRECENTNEWS = "getRecentNews";
 	public static final String ACTION_FREGUENTQUERY = "frequentQuery";
 	
