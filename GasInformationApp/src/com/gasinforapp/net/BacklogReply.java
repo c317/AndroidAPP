@@ -19,43 +19,46 @@ public class BacklogReply {
 	/**
 	 * 连接到后台发送办公回复
 	 * 
- 	 * @param userId
-	 *          当前用户职工编号
+	 * @param userId
+	 *            当前用户职工编号
 	 * @param token
-	 *          安全标识码
-	 * @param  itemId
-	 * 			事项编号
+	 *            安全标识码
+	 * @param itemId
+	 *            事项编号
 	 * @param requestId
-	 * 			请求者Id
+	 *            请求者Id
 	 * @param replyTime
-	 * 			回复时间
+	 *            回复时间
 	 * @param comment
-	 * 			回复意见
+	 *            回复意见
 	 * @param textComment
-	 * 			修改意见
+	 *            修改意见
 	 * @param successCallback
-	 *          成功回调接口 
+	 *            成功回调接口
 	 * @param failCallback
-	 *          失败回调接口
+	 *            失败回调接口
 	 */
-	
-	public BacklogReply(final String userId, final String token, final String requesterId, final String itemId,
-			final String requestId,final String replyTime,final String comment,final String textComment,
-			final SuccessCallback successCallback,final FailCallback failCallback){
+
+	public BacklogReply(final String userId, final String token,
+			final String requesterId, final String itemId,
+			final String requestId, final String replyTime,
+			final String comment, final String textComment,
+			final SuccessCallback successCallback,
+			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL_OA + MyConfig.ACTION_SENDAFFAIRSREPLY,
-				new Response.Listener<String>(){
+				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-						
+
 						System.out.println(response);
-						
+
 						try {
 							JSONObject obj = new JSONObject(response);
 
 							switch (obj.getInt(MyConfig.KEY_STATUS)) {
-							//连接成功
+							// 连接成功
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								if (successCallback != null) {
 									successCallback.onSuccess();
@@ -82,16 +85,16 @@ public class BacklogReply {
 										.onFail(MyConfig.RESULT_STATUS_FAIL);
 							}
 						}
-					}			
-		},new Response.ErrorListener(){
+					}
+				}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("TAG", error.getMessage(), error);
-				if(failCallback!=null)
-					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
-			}
-		}){
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("TAG", error.getMessage(), error);
+						if (failCallback != null)
+							failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}) {
 			@Override
 			protected Map<String, String> getParams() {
 				// 在这里设置需要的参数
@@ -106,13 +109,13 @@ public class BacklogReply {
 				return map;
 			}
 		};
-		
+
 		System.out.println(stringRequest.getUrl());
 
 		stringRequest.setTag("getSendffairsReplyApost");
 		VolleyUtil.getRequestQueue().add(stringRequest);
 	}
-	
+
 	public static interface SuccessCallback {
 		void onSuccess();
 	}
@@ -122,4 +125,3 @@ public class BacklogReply {
 	}
 
 }
-

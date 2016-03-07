@@ -46,7 +46,21 @@
         </activity>
         <activity android:name="com.gasinforapp.activity.StartPolling" >
         </activity>
-        <activity android:name="com.gasinforapp.downloadtest.DownLoadTest" >
+        <activity android:name="com.gasinforapp.activity.DataContentAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.uploadtest.PostUploadActivity" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.HotspotContentAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.AffairsHaveDoneDetailAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.AffairsReplyDetailAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.AffairsRequestDetailAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.AffairsToDoDetailAty" >
+        </activity>
+        <activity android:name="com.gasinforapp.activity.NewAffairRequestAty" >
         </activity>
 
         <service

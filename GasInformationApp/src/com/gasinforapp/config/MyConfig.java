@@ -5,15 +5,18 @@ import android.content.SharedPreferences.Editor;
 
 public  class MyConfig {
 
-	public static final String SERVER_URL =  "http://192.168.0.115:8080/GasInformationAppS/home/";
-	public static final String SERVER_URL_OA =  "http://192.168.0.115:8080/GasInformationAppS/oa/";
-	public static final String SERVER_URL_GROUP =  "http://192.168.0.115:8080/GasInformationAppS/group/";
+	public static final String SERVER_URL =  "http://192.168.0.101:8080/GasInformationAppS/home/";
+	public static final String SERVER_URL_OA =  "http://192.168.0.101:8080/GasInformationAppS/work/";
+	public static final String SERVER_URL_GROUP =  "http://192.168.0.101:8080/GasInformationAppS/group/";
+	public static final String SERVER_URL_WORK =  "http://192.168.0.101:8080/GasInformationAppS/work/";
+	public static final String SERVER_URL_UPLOAD =  "http://";
 //	public static final String SERVER_URL =  "http://darmin.hicp.net:17504/GasInformationAppS/home/";
 //	public static final String SERVER_URL_OA =  "http://darmin.hicp.net:17504/GasInformationAppS/oa/";
 //	public static final String SERVER_URL_GROUP =  "http://darmin.hicp.net:17504/GasInformationAppS/group/";
 	public static final int 	  MODULEID_HOT = 1;
-	public static final int 	  MODULEID_ATTENTION= 11;
-	public static final int 	  MODULEID_RECOMMEND= 12;
+	public static final int 	  MODULEID_HOTSPOT= 7;
+	public static final int 	  MODULEID_TOPIC= 8;
+	public static final int 	  MODULEID_DATA= 9;
 	
 	public static final String CHARSET = "utf-8";
 	public static final String APP_ID = "com.gasinforapp";
@@ -58,16 +61,21 @@ public  class MyConfig {
 	public static final String KEY_MEMBERS_MTYPE = "mtype"; 
 	public static final String KEY_MESSAGE = "msg"; 
 	public static final String KEY_TODOITEMS = "toDoItems";
-	public static final String KEY_TODOCONTENT = "toDoContent";
-	public static final String KEY_HAVEDONEITEMS = "haveDoneItems";	
+	public static final String KEY_TODOCONTENT = "todoContent";
+	public static final String KEY_HAVEDONEITEMS = "haveDoneContent";	
+	public static final String KEY_AFFAIR_RQCONTENT = "officeRequestContent";	
+	public static final String KEY_AFFAIR_RPCONTENT = "officeReplyContent";	
 	public static final String KEY_OFFICEREQUESTITEMS = "officeRequestItems";	
 	public static final String KEY_OFFICEREPLYITEMS = "officeReplyItems";	
 	public static final String KEY_AFFAIRS_ITEMID = "itemId";
+	public static final String KEY_AFFAIRS_AFFAIRID = "affairID";
 	public static final String KEY_AFFAIRS_REQUESTERID = "requesterId";
+	public static final String KEY_AFFAIRS_REQUESTER = "requester";
 	public static final String KEY_AFFAIRS_APPROVERID = "approverId";
-	public static final String KEY_AFFAIRS_TITLE = "title";
+	public static final String KEY_AFFAIRS_APPROVER = "approver";
+	public static final String KEY_AFFAIRS_TITLE = "requestTitle";
 	public static final String KEY_AFFAIRS_TEXTCONTENT = "textContent";
-	public static final String KEY_AFFAIRS_PICTURES = "pictures";
+	public static final String KEY_AFFAIRS_PICTURES = "pictureUrl";
 	public static final String KEY_AFFAIRS_DEPARTMENT = "department";
 	public static final String KEY_AFFAIRS_REQUESTTIME = "requestTime";
 	public static final String KEY_AFFAIRS_REPLYTIME = "replyTime";
@@ -75,6 +83,15 @@ public  class MyConfig {
 	public static final String KEY_AFFAIRS_TEXTCOMMENT = "textComment";
 	public static final String KEY_CHATS = "chats";
 	public static final String KEY_MSG_KIND = "kind";
+	public static final String KEY_DATA = "data";
+	public static final String KEY_DATA_TITLE = "title";
+	public static final String KEY_DATA_SOURCE = "source";
+	public static final String KEY_DATA_PUBTIME = "pubTime";
+	public static final String KEY_DATA_MODULE_ID = "module";
+	public static final String KEY_DATA_ID = "id";
+	public static final String KEY_DATA_CONTENT = "content";
+	public static final String KEY_DATA_FILENAME = "fileName";
+	public static final String KEY_DATA_URL = "URL";
 	
 	
 	public static final String ACTION_LOGIN = "loginAction";
@@ -83,7 +100,9 @@ public  class MyConfig {
 	public static final String ACTION_GETNOTICELIST = "getNoticeListAction";
 	public static final String ACTION_GETCHATLIST = "getChatListAction";
 	public static final String ACTION_GETCOMMENT = "getCommentListAction";
+	public static final String ACTION_GETDATALIST = "getFileMessageAction";
 	public static final String ACTION_GETNEWS= "getNewsContentAction";
+	public static final String ACTION_GETDATA= "getDataContentAction";
 	public static final String ACTION_GETMEMBERS= "getMembersAction";
 	public static final String ACTION_MANAGEMEMBERS= "manageMemberAction";
 	public static final String ACTION_ADDMEMBERS = "addBatchMembersAction";
@@ -93,12 +112,12 @@ public  class MyConfig {
 	public static final String ACTION_CHECKTODOLIST = "checkToDoList";
 	public static final String ACTION_CHECKTODODETAIL = "checkToDoDetail";	
 	public static final String ACTION_CHECKHAVEDONELIST = "checkHaveDoneList";
-	public static final String ACTION_CHECKHAVEDONEDETAIL = "checkHaveDoneDetail";	
+	public static final String ACTION_CHECKHAVEDONEDETAIL = "checkHaveDoneDetail";
 	public static final String ACTION_CHECKOFFICEREQUESTLIST = "checkOfficeRequestList";
 	public static final String ACTION_CHECKOFFICEREQUESTDETAIL = "checkOfficeRequestDetail";
 	public static final String ACTION_CHECKOFFICEREPLYLIST = "checkOfficeReplyList";
 	public static final String ACTION_CHECKOFFICEREPLYDETAIL = "checkOfficeReplyDetail";
-	public static final String ACTION_SENDAFFAIRSREQUEST = "sendAffairsRequest";
+	public static final String ACTION_SENDAFFAIRSREQUEST = "sendOfficeRequest";
 	public static final String ACTION_RESENDAFFAIRSREQUEST = "resendAffairsRequest";
 	public static final String ACTION_SENDAFFAIRSREPLY = "sendAffairsReply";
 	public static final String ACTION_GETRECENTNEWS = "getRecentNews";

@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,43 +20,45 @@ public class BacklogRequest {
 	/**
 	 * 连接到后台发送办公请求
 	 * 
- 	 * @param userId
-	 *           当前用户职工编号
+	 * @param userId
+	 *            当前用户职工编号
 	 * @param token
-	 *           安全标识码
+	 *            安全标识码
 	 * @param approverId
-	 * 			  审批者Id
+	 *            审批者Id
 	 * @param title
-	 * 			  请求标题
+	 *            请求标题
 	 * @param requestTime
-	 * 			  请求时间
+	 *            请求时间
 	 * @param textContent
-	 * 			 请求文本
+	 *            请求文本
 	 * @param pictures
-	 * 			 请求图片
+	 *            请求图片
 	 * @param successCallback
-	 *           成功回调接口
+	 *            成功回调接口
 	 * @param failCallback
-	 *           失败回调接口
+	 *            失败回调接口
 	 */
-	
-	public BacklogRequest(final String userId, final String token,final String approverId,final String title,
-			final String requestTime,final String textContent,final String pictures,
-			final SuccessCallback successCallback,final FailCallback failCallback){
+
+	public BacklogRequest(final String userId, final String token,
+			final String approverId, final String title,
+			final String requestTime, final String textContent,
+			final String pictures, final SuccessCallback successCallback,
+			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL_OA + MyConfig.ACTION_SENDAFFAIRSREQUEST,
-				new Response.Listener<String>(){
+				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-						
+
 						System.out.println(response);
-						
+
 						try {
 							JSONObject obj = new JSONObject(response);
 
-							switch (obj.getInt(MyConfig.KEY_STATUS)) {
-							//连接成功
+							switch (obj.optInt(MyConfig.KEY_STATUS)) {
+							// 连接成功
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								if (successCallback != null) {
 									successCallback.onSuccess();
@@ -82,16 +85,16 @@ public class BacklogRequest {
 										.onFail(MyConfig.RESULT_STATUS_FAIL);
 							}
 						}
-					}			
-		},new Response.ErrorListener(){
+					}
+				}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("TAG", error.getMessage(), error);
-				if(failCallback!=null)
-					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
-			}
-		}){
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("TAG", error.getMessage(), error);
+						if (failCallback != null)
+							failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}) {
 			@Override
 			protected Map<String, String> getParams() {
 				// 在这里设置需要的参数
@@ -105,14 +108,23 @@ public class BacklogRequest {
 				map.put(MyConfig.KEY_AFFAIRS_PICTURES, pictures + "");
 				return map;
 			}
+
+			@Override
+			public Map<String, String> getHeaders() throws AuthFailureError {
+				HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Charset", "UTF-8");
+
+                return headers;
+			}
+			
 		};
-		
+
 		System.out.println(stringRequest.getUrl());
 
-		stringRequest.setTag("getSendffairsRequestApost");
+		stringRequest.setTag("getSendAffairsRequestApost");
 		VolleyUtil.getRequestQueue().add(stringRequest);
 	}
-	
+
 	public static interface SuccessCallback {
 		void onSuccess();
 	}

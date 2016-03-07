@@ -22,8 +22,8 @@ import com.gasinforapp.config.VolleyUtil;
 public class BacklogList {
 
 	/**
-	 * 连接后台得到待办事项列表
-	 * 以当前用户职工编号在数据库中查询
+	 * 连接后台得到待办事项列表 以当前用户职工编号在数据库中查询
+	 * 
 	 * @param userId
 	 *            当前用户职工编号
 	 * @param token
@@ -37,36 +37,37 @@ public class BacklogList {
 	 * @param failCallback
 	 *            失败回调接口 实例化时写获取办公事项列表失败后的操作
 	 */
-	public BacklogList(final String userId, final String token,final int page,final int perpage,final int isRead,
-			final SuccessCallback successCallback,
-			final FailCallback failCallback){
+	public BacklogList(final int userId, final String token, final int page,
+			final int perpage, final SuccessCallback successCallback,
+			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL_OA + MyConfig.ACTION_CHECKTODOLIST,
-				new Response.Listener<String>(){
+				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-						
+
 						System.out.println(response);
-						
+
 						try {
 							JSONObject obj = new JSONObject(response);
 
 							switch (obj.optInt(MyConfig.KEY_STATUS)) {
-							//连接成功
+							// 连接成功
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								if (successCallback != null) {
-									//事项的编号、请求者id、审批者id、标题、请求时间、部门是以JSON数组的格式
+									// 事项的编号、请求者、审批者id、标题、请求时间、部门是以JSON数组的格式
 									List<Affairs> toDoItems = new ArrayList<Affairs>();
 									JSONArray affairsJsonArray = obj
 											.optJSONArray(MyConfig.KEY_TODOITEMS);
-									for (int i = 0; i < affairsJsonArray.length(); i++) {
+									for (int i = 0; i < affairsJsonArray
+											.length(); i++) {
 										JSONObject newsObject = affairsJsonArray
 												.optJSONObject(i);
 										String itemId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_ITEMID);
-										String requesterId = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_REQUESTERID);
+										String requester = newsObject
+												.optString(MyConfig.KEY_AFFAIRS_REQUESTER);
 										String approverId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_APPROVERID);
 										String title = newsObject
@@ -74,11 +75,11 @@ public class BacklogList {
 										String department = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_DEPARTMENT);
 										String requestTime = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);				
+												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
 
 										Affairs as = new Affairs();
 										as.setItemId(itemId);
-										as.setRequesterId(requesterId);
+										as.setRequester(requester);
 										as.setApproverId(approverId);
 										as.setRequestTitle(title);
 										as.setDepartment(department);
@@ -86,7 +87,8 @@ public class BacklogList {
 										toDoItems.add(as);
 									}
 
-									successCallback.onSuccess(page, perpage,isRead,toDoItems);
+									successCallback.onSuccess(page, perpage,
+											toDoItems);
 								}
 								break;
 							case MyConfig.RESULT_STATUS_INVALID_TOKEN:
@@ -110,16 +112,16 @@ public class BacklogList {
 										.onFail(MyConfig.RESULT_STATUS_FAIL);
 							}
 						}
-					}			
-		},new Response.ErrorListener(){
+					}
+				}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("TAG", error.getMessage(), error);
-				if(failCallback!=null)
-					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
-			}
-		}){
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("TAG", error.getMessage(), error);
+						if (failCallback != null)
+							failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}) {
 			@Override
 			protected Map<String, String> getParams() {
 				// 在这里设置需要的参数
@@ -131,15 +133,15 @@ public class BacklogList {
 				return map;
 			}
 		};
-		
+
 		System.out.println(stringRequest.getUrl());
 
 		stringRequest.setTag("optAffairsListpost");
 		VolleyUtil.getRequestQueue().add(stringRequest);
 	}
-	
+
 	public static interface SuccessCallback {
-		void onSuccess(int page, int perpage, int isRead,List<Affairs> toDoItems);
+		void onSuccess(int page, int perpage, List<Affairs> toDoItems);
 	}
 
 	public static interface FailCallback {

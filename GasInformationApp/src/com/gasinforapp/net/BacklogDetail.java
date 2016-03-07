@@ -28,47 +28,43 @@ public class BacklogDetail {
 	 * @param token
 	 *            安全标识码
 	 * @param requesterId
-	 * 			    请求者Id
+	 *            请求者Id
 	 * @param itemId
-	 * 			    事项编号
+	 *            事项编号
 	 * @param successCallback
 	 *            成功回调接口 实例化时写获取办公事项详情成功后的操作
 	 * @param failCallback
 	 *            失败回调接口 实例化时写获取办公事项详情失败后的操作
 	 */
 	public BacklogDetail(final String userId, final String token,
-			final String requesterId,final String itemId,
+			final String requesterId, final String itemId,
 			final SuccessCallback successCallback,
-			final FailCallback failCallback){
+			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL_OA + MyConfig.ACTION_CHECKTODODETAIL,
-				new Response.Listener<String>(){
+				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-						
+
 						System.out.println(response);
-						
+
 						try {
 							JSONObject obj = new JSONObject(response);
 
-							switch (obj.getInt(MyConfig.KEY_STATUS)) {
-							//连接成功
+							switch (obj.optInt(MyConfig.KEY_STATUS)) {
+							// 连接成功
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								if (successCallback != null) {
-									//事项的编号、请求人id、审批人id、请求时间、文本内容、图片url、部门是以JSON数组的格式
-									List<Affairs> toDoContent = new ArrayList<Affairs>();
-									JSONArray affairsJsonArray = obj
-											.optJSONArray(MyConfig.KEY_TODOCONTENT);
-									for (int i = 0; i < affairsJsonArray.length(); i++) {
-										JSONObject newsObject = affairsJsonArray
-												.optJSONObject(i);
+									// 事项的编号、请求人id、审批人id、请求时间、文本内容、图片url、部门是以JSON数组的格式
+										JSONObject newsObject = obj
+												.optJSONObject(MyConfig.KEY_TODOCONTENT);
 										String itemId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_ITEMID);
 										String requestId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_REQUESTERID);
 										String approverId = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_APPROVERID);				
+												.optString(MyConfig.KEY_AFFAIRS_APPROVERID);
 										String requestTime = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
 										String textContent = newsObject
@@ -83,13 +79,10 @@ public class BacklogDetail {
 										as.setApproverId(approverId);
 										as.setRequestTime(requestTime);
 										as.setTextContent(textContent);
-										as.setPictureUrl(pictureUrl);
+										as.setPictures(pictureUrl);
 										as.setDepartment(department);
-										toDoContent.add(as);
+										successCallback.onSuccess(as);
 									}
-
-									successCallback.onSuccess(toDoContent);
-								}
 								break;
 							case MyConfig.RESULT_STATUS_INVALID_TOKEN:
 								if (failCallback != null) {
@@ -112,36 +105,36 @@ public class BacklogDetail {
 										.onFail(MyConfig.RESULT_STATUS_FAIL);
 							}
 						}
-					}			
-		},new Response.ErrorListener(){
+					}
+				}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("TAG", error.getMessage(), error);
-				if(failCallback!=null)
-					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
-			}
-		}){
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("TAG", error.getMessage(), error);
+						if (failCallback != null)
+							failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}) {
 			@Override
 			protected Map<String, String> getParams() {
 				// 在这里设置需要的参数
 				Map<String, String> map = new HashMap<String, String>();
 				map.put(MyConfig.KEY_USERID, userId + "");
 				map.put(MyConfig.KEY_TOKEN, token + "");
-				map.put(MyConfig.KEY_AFFAIRS_APPROVERID, userId + "");
-				map.put(MyConfig.KEY_AFFAIRS_ITEMID, token + "");
+				map.put(MyConfig.KEY_AFFAIRS_APPROVERID, requesterId + "");
+				map.put(MyConfig.KEY_AFFAIRS_AFFAIRID, itemId + "");
 				return map;
 			}
 		};
-		
+
 		System.out.println(stringRequest.getUrl());
 
 		stringRequest.setTag("getAffairsDetailpost");
 		VolleyUtil.getRequestQueue().add(stringRequest);
 	}
-	
+
 	public static interface SuccessCallback {
-		void onSuccess(List<Affairs> toDoContent);
+		void onSuccess(Affairs toDoContent);
 	}
 
 	public static interface FailCallback {

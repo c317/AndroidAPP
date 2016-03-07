@@ -16,10 +16,11 @@
         android:layout_centerVertical="true"
         android:orientation="horizontal" >
 
-        <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:src="@drawable/test_profile" />
+       <Button
+                android:onClick="toggleMenu"
+                android:layout_width="30dp"
+      			android:layout_height="30dp"
+       			android:background="@drawable/test_profile" />
     </LinearLayout>
 
     <LinearLayout

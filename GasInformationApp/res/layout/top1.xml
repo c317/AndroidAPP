@@ -14,11 +14,17 @@
         android:layout_alignParentLeft="true"
         android:orientation="horizontal">
         
-         <ImageView 
+         <!-- <ImageView 
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:src="@drawable/test_profile"
-            />
+            /> -->
+            
+            <Button
+                android:onClick="toggleMenu"
+                android:layout_width="30dp"
+      			android:layout_height="30dp"
+       			android:background="@drawable/test_profile" />
 
         </LinearLayout>
     <LinearLayout
@@ -45,11 +51,18 @@
         android:layout_alignParentRight="true"
         android:orientation="horizontal">
         
-         <ImageView 
+<!--          <ImageView 
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/actionbar_search_icon"
-            />
-
+            /> -->
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/actionbar_search_icon"/>
         </LinearLayout>
+
+    
+
 </RelativeLayout>

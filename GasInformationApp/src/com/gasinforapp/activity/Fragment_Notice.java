@@ -86,7 +86,13 @@ public class Fragment_Notice extends Fragment implements
 		noticeList = dataBaseHelper.queryMultiNotice(nums);
 		adapter.clear();
 		adapter.addAll(noticeList);
-		lvNotice.onRefreshComplete();
+		lvNotice.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+            	lvNotice.onRefreshComplete();
+            }
+        }, 300);
 	}
 
 	@Override

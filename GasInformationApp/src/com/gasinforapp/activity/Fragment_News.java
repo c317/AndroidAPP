@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class Fragment_News extends Fragment implements
 	private NewsAdapter adapter;
 	private List<HotNewsDTO> newsList;
 	private int pageNum = 1;
-	private int numsPerPage =10;
+	private int numsPerPage = 10;
 	private GasInforDataBaseHelper dataBaseHelper;
 
 	@Override
@@ -43,19 +44,20 @@ public class Fragment_News extends Fragment implements
 		// 得到控件
 		lvNews = (PullToRefreshListView) view.findViewById(R.id.mylv);
 		lvNews.setMode(Mode.BOTH);
-		dataBaseHelper = GasInforDataBaseHelper.getDatebaseHelper(getActivity());
+		dataBaseHelper = GasInforDataBaseHelper
+				.getDatebaseHelper(getActivity());
 		newsList = new ArrayList<HotNewsDTO>();
 		adapter = new NewsAdapter(getActivity(), newsList);
 		ListView actualListView = lvNews.getRefreshableView();
 		actualListView.setAdapter(adapter);
 		// 加载数据
-		loadMessage(pageNum*numsPerPage);
+		loadMessage(pageNum * numsPerPage);
 		setOnListener();
 		return view;
 	}
-	
+
 	private void setOnListener() {
-	/**
+		/**
 		 * 点击每项新闻事件
 		 */
 		lvNews.setOnItemClickListener(new OnItemClickListener() {
@@ -65,7 +67,8 @@ public class Fragment_News extends Fragment implements
 				Bundle bundle = new Bundle();
 				bundle.putInt("newsId", newsList.get(arg2 - 1).getId());
 				intent.putExtras(bundle);
-				dataBaseHelper.updataHotNews(newsList.get(arg2 - 1).getId()+"");
+				dataBaseHelper.updataHotNews(newsList.get(arg2 - 1).getId()
+						+ "");
 				newsList.get(arg2 - 1).setRead(1);
 				startActivity(intent);
 			}
@@ -83,7 +86,13 @@ public class Fragment_News extends Fragment implements
 		newsList = dataBaseHelper.queryMultiHotNews(nums);
 		adapter.clear();
 		adapter.addAll(newsList);
-		lvNews.onRefreshComplete();
+		lvNews.postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+            	lvNews.onRefreshComplete();
+            }
+        }, 300);
 	}
 
 	@Override
@@ -92,7 +101,7 @@ public class Fragment_News extends Fragment implements
 	 */
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
 		pageNum = 1;
-		loadMessage(pageNum*numsPerPage);
+		loadMessage(pageNum * numsPerPage);
 	}
 
 	/**
@@ -101,7 +110,7 @@ public class Fragment_News extends Fragment implements
 	@Override
 	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
 		pageNum++;
-		loadMessage(pageNum*numsPerPage);
+		loadMessage(pageNum * numsPerPage);
 	}
-	
+
 }

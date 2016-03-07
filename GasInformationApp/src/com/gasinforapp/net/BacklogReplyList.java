@@ -22,45 +22,46 @@ import com.gasinforapp.config.VolleyUtil;
 public class BacklogReplyList {
 	/**
 	 * 连接到后台办公回复列表
-	 * @Paarm userId
-	 * 			当前用户职工编号
+	 * 
+	 * @Paarm userId 当前用户职工编号
 	 * @param token
-	 * 			安全标识码
+	 *            安全标识码
 	 * @param page
-	 * 			页码
+	 *            页码
 	 * @param perpage
-	 * 			每页数量
+	 *            每页数量
 	 */
-	public BacklogReplyList(final String userId, final String token,final int page,final int perpage,final int isRead,
-			final SuccessCallback successCallback,
-			final FailCallback failCallback){
+	public BacklogReplyList(final int userId, final String token,
+			final int page, final int perpage,final SuccessCallback successCallback,
+			final FailCallback failCallback) {
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
 				MyConfig.SERVER_URL_OA + MyConfig.ACTION_CHECKOFFICEREPLYLIST,
-				new Response.Listener<String>(){
+				new Response.Listener<String>() {
 
 					@Override
 					public void onResponse(String response) {
-						
+
 						System.out.println(response);
-						
+
 						try {
 							JSONObject obj = new JSONObject(response);
 
 							switch (obj.optInt(MyConfig.KEY_STATUS)) {
-							//连接成功
+							// 连接成功
 							case MyConfig.RESULT_STATUS_SUCCESS:
 								if (successCallback != null) {
-									//事项的标题、请求时间、部门是以JSON数组的格式
+									// 事项的标题、请求时间、部门是以JSON数组的格式
 									List<Affairs> officeReplyItems = new ArrayList<Affairs>();
 									JSONArray affairsJsonArray = obj
 											.optJSONArray(MyConfig.KEY_OFFICEREPLYITEMS);
-									for (int i = 0; i < affairsJsonArray.length(); i++) {
+									for (int i = 0; i < affairsJsonArray
+											.length(); i++) {
 										JSONObject newsObject = affairsJsonArray
 												.optJSONObject(i);
 										String itemId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_ITEMID);
 										String requesterId = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_REQUESTERID);
+												.optString(MyConfig.KEY_AFFAIRS_REQUESTER);
 										String approverId = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_APPROVERID);
 										String title = newsObject
@@ -68,7 +69,7 @@ public class BacklogReplyList {
 										String department = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_DEPARTMENT);
 										String requestTime = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);				
+												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
 
 										Affairs as = new Affairs();
 										as.setItemId(itemId);
@@ -80,7 +81,7 @@ public class BacklogReplyList {
 										officeReplyItems.add(as);
 									}
 
-									successCallback.onSuccess(page, perpage,isRead,officeReplyItems);
+									successCallback.onSuccess(page, perpage,officeReplyItems);
 								}
 								break;
 							case MyConfig.RESULT_STATUS_INVALID_TOKEN:
@@ -104,16 +105,16 @@ public class BacklogReplyList {
 										.onFail(MyConfig.RESULT_STATUS_FAIL);
 							}
 						}
-					}			
-		},new Response.ErrorListener(){
+					}
+				}, new Response.ErrorListener() {
 
-			@Override
-			public void onErrorResponse(VolleyError error) {
-				Log.e("TAG", error.getMessage(), error);
-				if(failCallback!=null)
-					failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
-			}
-		}){
+					@Override
+					public void onErrorResponse(VolleyError error) {
+						Log.e("TAG", error.getMessage(), error);
+						if (failCallback != null)
+							failCallback.onFail(MyConfig.RESULT_STATUS_FAIL);
+					}
+				}) {
 			@Override
 			protected Map<String, String> getParams() {
 				// 在这里设置需要的参数
@@ -125,15 +126,15 @@ public class BacklogReplyList {
 				return map;
 			}
 		};
-		
+
 		System.out.println(stringRequest.getUrl());
 
-		stringRequest.setTag("optRequestAffairsListpost");
+		stringRequest.setTag("optReplyAffairsListpost");
 		VolleyUtil.getRequestQueue().add(stringRequest);
 	}
-	
+
 	public static interface SuccessCallback {
-		void onSuccess(int page, int perpage, int isRead,List<Affairs> officeReplyItems);
+		void onSuccess(int page, int perpage, List<Affairs> officeReplyItems);
 	}
 
 	public static interface FailCallback {
