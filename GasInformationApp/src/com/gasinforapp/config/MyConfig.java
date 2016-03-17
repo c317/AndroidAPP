@@ -24,6 +24,7 @@ public  class MyConfig {
 	public static final String APP_ID = "com.gasinforapp";
 	
 	//下载文件文件夹地址
+	public static final String APP_PATH = "/storage/emulated/0/";
 	public static final String APP_DOWNPATH = "/storage/emulated/0/down/";
 	//统一参数名
 	public static final String KEY_TOKEN = "token";

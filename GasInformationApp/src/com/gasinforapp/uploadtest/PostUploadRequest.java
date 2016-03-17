@@ -139,7 +139,7 @@ public class PostUploadRequest extends Request<String> {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Log.v("zgy", "=====formImage====\n" + bos.toString());
+		Log.v(TAG, "=====formImage====\n" + bos.toString());
 		return bos.toByteArray();
 	}
 

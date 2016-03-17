@@ -12,6 +12,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import com.gasinforapp.config.MyConfig;
+
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.util.Log;
@@ -28,7 +30,9 @@ public class Download {
     {  
         this.urlstr = url;  
         //获取设备sd卡目录  
-        this.sdcard = Environment.getExternalStorageDirectory() + "/";  
+        this.sdcard = Environment.getExternalStorageDirectory() + "/"; 
+//        this.sdcard = MyConfig.APP_PATH; 
+        String path = sdcard;
         urlcon = getConnection();  
     }  
       
