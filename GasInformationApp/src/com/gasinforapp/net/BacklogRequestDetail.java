@@ -70,8 +70,10 @@ public class BacklogRequestDetail {
 								String requestTime = newsObject
 										.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
 								String textContent = newsObject
-										.optString(MyConfig.KEY_AFFAIRS_TEXTCONTENT);
+										.optString(MyConfig.KEY_AFFAIRS_MESSAGE);
 								String pictureUrl = newsObject
+										.optString(MyConfig.KEY_AFFAIRS_PICTURES_URL);
+								String picture = newsObject
 										.optString(MyConfig.KEY_AFFAIRS_PICTURES);
 								String department = newsObject
 										.optString(MyConfig.KEY_AFFAIRS_DEPARTMENT);
@@ -82,6 +84,7 @@ public class BacklogRequestDetail {
 								as.setRequestTime(requestTime);
 								as.setTextContent(textContent);
 								as.setPictures(pictureUrl);
+								as.setPictures(picture);
 								as.setDepartment(department);
 								successCallback.onSuccess(as);
 							}

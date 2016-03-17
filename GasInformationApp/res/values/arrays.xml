@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string-array name="name">
+        <item>刘传芳</item>
+        <item>刘英海</item>
+        <item>张瑞霞</item>
+        <item>吴珊</item>
+        <item>黄汝新</item>
+        <item>姜航</item>
+        <item>潘思贵</item>
+        <item>孟刚</item>
+        <item>葛维宁</item>
+        <item>吴韫倩</item>
+        <item>陈敏</item>
+        <item>曲俊利</item>
+        <item>王天元</item>
+        <item>冯志刚</item>
+        <item>梅丹</item>
+    </string-array>
+    
+    <string-array name="dept">
+        <item>返聘人员</item>
+        <item>返聘人员</item>
+        <item>信访信息分析室</item>
+        <item>信访信息分析室</item>
+        <item>信访信息分析室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>矿产储量室</item>
+        <item>办公室</item>
+        <item>人事处</item>
+    </string-array>
+
+      <string-array name="number">
+        <item>156235489（示例）</item>
+        <item>136982686（示例）</item>
+        <item>123546926（示例）</item>
+        <item>156985984（示例）</item>
+        <item>136982686（示例）</item>
+        <item>123546926（示例）</item>
+        <item>156985984（示例）</item>
+        <item>136982686（示例）</item>
+        <item>123546926（示例）</item>
+        <item>156985984（示例）</item>
+        <item>136982686（示例）</item>
+        <item>123546926（示例）</item>
+        <item>156985984（示例）</item>
+        <item>123546926（示例）</item>
+        <item>156985984（示例）</item>
+    </string-array>
+    
+      <string-array name="dialog_arrays">  
+        <item >默认收藏夹</item>  
+        <item >我的收藏夹1</item>  
+        <item >我的收藏夹2</item>  
+        <item >办公收藏夹1</item>  
+        <item >办公收藏夹2</item>  
+        <item >办公收藏夹3</item>  
+    </string-array>  
+
+</resources>

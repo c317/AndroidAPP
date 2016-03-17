@@ -45,7 +45,7 @@ public class DataContentAty extends Activity {
 	private String fileName;
 	private String fileurl;
 	private static String downloadURL = MyConfig.SERVER_URL_WORK+"download?"+MyConfig.KEY_DATA_MODULE_ID+"="+MyConfig.MODULEID_DATA+"&fileName=";
-	private static String path = "/storage/emulated/0/down/";
+	private static String path = MyConfig.APP_DOWNPATH;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

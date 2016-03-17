@@ -86,6 +86,7 @@ public class ExamineDialog extends Dialog {
 											Toast.makeText(getContext(),
 													"已提交",
 													Toast.LENGTH_LONG).show();
+											dismiss();
 										}
 										
 									}.execute();

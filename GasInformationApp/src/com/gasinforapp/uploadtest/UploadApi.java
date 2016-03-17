@@ -7,6 +7,7 @@ import com.android.volley.Request;
 import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,15 @@ public class UploadApi {
      * @param listener 请求回调
      */
     public static void uploadImg(Bitmap bitmap,ResponseListener listener){
-        List<FormImage> imageList = new ArrayList<FormImage>() ;
-        imageList.add(new FormImage(null,null,1,bitmap)) ;
-        Request request = new PostUploadRequest(MyConfig.SERVER_URL_WORK,imageList,listener) ;
+        List<FormFile> imageList = new ArrayList<FormFile>() ;
+        imageList.add(new FormFile("测试.png",1,bitmap)) ;
+        Request request = new PostUploadRequest(MyConfig.SERVER_URL_UPLOAD+MyConfig.ACTION_FILE_UPLOAD,imageList,listener) ;
         VolleyUtil.getRequestQueue().add(request);;
+    }
+    public static void uploadImg(File file,ResponseListener listener){
+    	List<FormFile> filelist = new ArrayList<FormFile>() ;
+    	filelist.add(new FormFile(file.getName(),1,file)) ;
+    	Request request = new PostUploadRequest(MyConfig.SERVER_URL_UPLOAD+MyConfig.ACTION_FILE_UPLOAD,filelist,listener) ;
+    	VolleyUtil.getRequestQueue().add(request);;
     }
 }

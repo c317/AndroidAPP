@@ -76,6 +76,8 @@ public class Fragment_requestAffairs extends Fragment implements
 						.getRequester());
 				bundle.putString(MyConfig.KEY_AFFAIRS_DEPARTMENT, affairsList.get(arg2 - 1)
 						.getDepartment());
+				bundle.putInt(MyConfig.KEY_AFFAIRS_STATUS, affairsList.get(arg2 - 1)
+						.getOpinion());
 				intent.putExtras(bundle);
 				startActivity(intent);
 				// startActivityForResult(intent,1);

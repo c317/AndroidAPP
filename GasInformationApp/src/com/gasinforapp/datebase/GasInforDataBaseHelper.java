@@ -1,5 +1,8 @@
 package com.gasinforapp.datebase;
-
+/**
+ * version 2 修改 热点新闻表添加是否收藏字段
+ * version 1 包含3个表：通知公告表，热点新闻表，群组信息表
+ */
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -37,7 +40,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 
 	private static final String TAG = "DatabaseHelper";
 	public static final String DATABASE_NAME = "GasInfor_db";
-	private static final int DATABASE_VIRSON = 1;
+	private static final int DATABASE_VIRSON = 2;
 	private static SQLiteDatabase db;
 	// 消息按时间先后顺序插入表中，ID最大的为最近插入的一条消息
 	private static final String ORDER = "_id";
@@ -53,7 +56,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	private static final String NOTICE_PUBLISHER = "publisher";
 	private static final String NOTICE_TIME = "time";
 	private static final String NOTICE_ISREAD = "isread";
-
+	
 	/**
 	 * 热点新闻表及字段
 	 */
@@ -65,6 +68,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	private static final String HOTNEWS_TIME = "time";
 	private static final String HOTNEWS_LASTTIME = "lastTime";
 	private static final String HOTNEWS_ISREAD = "isread";
+    private static final String HOTNEWS_ISCOLLECT = "iscollect";
 
 	/**
 	 * 群消息表及字段
@@ -117,7 +121,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 				+ " integer, " + NOTICE_TITLE + " text, " + NOTICE_CONTENT
 				+ " text, " + NOTICE_SOURCE + " text, " + NOTICE_PUBLISHER
 				+ " text, " + NOTICE_TIME + " text, " + NOTICE_ISREAD
-				+ " integer)";
+				+ " integer )";
 		db.execSQL(sql);
 		/**
 		 * 热点新闻表
@@ -127,7 +131,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 				+ " integer unique, " + HOTNEWS_TITLE + " text, "
 				+ HOTNEWS_CONTENT + " text, " + HOTNEWS_SOURCE + " text, "
 				+ HOTNEWS_TIME + " text, " + HOTNEWS_LASTTIME + " text, "
-				+ HOTNEWS_ISREAD + " integer )";
+				+ HOTNEWS_ISREAD + " integer, " + HOTNEWS_ISCOLLECT + " integer )";
 		db.execSQL(sql);
 		/**
 		 * 群消息表
@@ -284,6 +288,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 				cv.put(HOTNEWS_TIME, newmessage.getPubTime());
 				cv.put(HOTNEWS_LASTTIME, newmessage.getLastTime());
 				cv.put(HOTNEWS_ISREAD, newmessage.getReadStatus());
+				cv.put(HOTNEWS_ISCOLLECT, newmessage.getCollectStatus());
 				db.insert(HOTNEWS_TABLENAME, null, cv);
 			}
 			db.setTransactionSuccessful();
@@ -315,6 +320,38 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 			message.setPubTime(cursor.getString(5));
 			message.setLastTime(cursor.getString(6));
 			message.setRead(cursor.getInt(7));
+			message.setCollect(cursor.getInt(8));
+			cursor.moveToNext();
+			messages.add(message);
+		}
+		cursor.close();
+		return messages;
+	}
+	
+	/**
+	 * 查询多条已收藏新闻
+	 */
+	public List<HotNewsDTO> queryMultiCollectedHotNews(int counts) {
+		ArrayList<HotNewsDTO> messages = new ArrayList<HotNewsDTO>();
+		String where = HOTNEWS_ISCOLLECT + " =? ";
+		String[] whereValue = { 1 + "" };
+		Cursor cursor = db.query(HOTNEWS_TABLENAME, null, where, whereValue, null,
+				null, ORDER + " desc limit 0," + counts);
+		if (cursor.getCount() == 0) {
+			cursor.close();
+			return messages;
+		}
+		cursor.moveToFirst();
+		while (!cursor.isAfterLast()) {
+			HotNewsDTO message = new HotNewsDTO();
+			message.setId(cursor.getInt(1));
+			message.setTitle(cursor.getString(2));
+			message.setContent(cursor.getString(3));
+			message.setSource(cursor.getString(4));
+			message.setPubTime(cursor.getString(5));
+			message.setLastTime(cursor.getString(6));
+			message.setRead(cursor.getInt(7));
+			message.setCollect(cursor.getInt(8));
 			cursor.moveToNext();
 			messages.add(message);
 		}
@@ -344,6 +381,7 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 			message.setPubTime(cursor.getString(5));
 			message.setLastTime(cursor.getString(6));
 			message.setRead(cursor.getInt(7));
+			message.setCollect(cursor.getInt(8));
 		}
 		cursor.close();
 		return message;
@@ -357,6 +395,28 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 		String[] whereValue = { id + "" };
 		ContentValues cv = new ContentValues();
 		cv.put(HOTNEWS_ISREAD, "1");
+		return db.update(HOTNEWS_TABLENAME, cv, where, whereValue);
+	}
+	
+	/**
+	 * 更新为已收藏热点新闻
+	 */
+	public int collectHotNews(String id) {
+		String where = HOTNEWS_ID + " =? ";
+		String[] whereValue = { id + "" };
+		ContentValues cv = new ContentValues();
+		cv.put(HOTNEWS_ISCOLLECT, "1");
+		return db.update(HOTNEWS_TABLENAME, cv, where, whereValue);
+	}
+	
+	/**
+	 * 更新为取消收藏热点新闻
+	 */
+	public int unCollectHotNews(String id) {
+		String where = HOTNEWS_ID + " =? ";
+		String[] whereValue = { id + "" };
+		ContentValues cv = new ContentValues();
+		cv.put(HOTNEWS_ISCOLLECT, "0");
 		return db.update(HOTNEWS_TABLENAME, cv, where, whereValue);
 	}
 
@@ -387,6 +447,17 @@ public class GasInforDataBaseHelper extends SQLiteOpenHelper {
 	public int getUnReadNumOfHotNews() {
 		String sql = "select count(*) from " + HOTNEWS_TABLENAME + " where "
 				+ HOTNEWS_ISREAD + "=0 ";
+		Cursor cursor = db.rawQuery(sql, null);
+		return cursor.getCount();
+	}
+	/**
+	 * 获取热点新闻中已收藏消息数目
+	 * 
+	 * @return
+	 */
+	public int getCollectedNumOfHotNews() {
+		String sql = "select count(*) from " + HOTNEWS_TABLENAME + " where "
+				+ HOTNEWS_ISCOLLECT + "=1 ";
 		Cursor cursor = db.rawQuery(sql, null);
 		return cursor.getCount();
 	}

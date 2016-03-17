@@ -12,19 +12,28 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class HomeActivity extends FragmentActivity{
-@Override
+
+	/*private home_SlidingMenu mMenu;*/
+	@Override
 	
 	protected void onCreate(Bundle savedInstanceState) {
+	
+	    
+	
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.home_aty);
 
+		/*mMenu = (home_SlidingMenu) findViewById(R.id.id_menu);*/
 		
 		init();
 	}
 		
 		
-	
+/*public void toggleMenu(View view)
+{
+	mMenu.toggle();
+}*/
 
 	////////////////////**************/////////////////////////
 	private FragmentTabHost mTabHost;

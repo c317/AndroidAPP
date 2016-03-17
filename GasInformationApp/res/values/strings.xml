@@ -6,7 +6,7 @@
     <string name="password">Password</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-	<string name="phone">Phone</string>
+    <string name="phone">Phone</string>
     <string name="get_code">Get code</string>
     <string name="code">Code</string>
     <string name="login">Login</string>
@@ -38,8 +38,13 @@
     <string name="menu_settings">Settings</string>
     <string name="noticetopname">Notice</string>
     <string name="invalid_token">you have not login,please login first</string>
-    
-    <string name="no_internet">No internet</string>  
-    <string name="generic_server_down">Fail to connect server</string>  
-    <string name="generic_error">Network anomaly,please try later</string>  
+    <string name="no_internet">No internet</string>
+    <string name="generic_server_down">Fail to connect server</string>
+    <string name="generic_error">Network anomaly,please try later</string>
+    <string name="title_activity_my_menu">MyMenu</string>
+    <string name="topname">我的</string>
+        <string name="fail_to_create_groups_data">创建群组失败!</string>
+    <string name="fail_to_create_groups_data1">群组名称不能为空!</string>
+    <string name="success_to_create_groups_data">创建成功!</string>
+
 </resources>

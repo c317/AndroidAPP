@@ -47,6 +47,7 @@ public class Fragment_Office extends Fragment {
 
 		initView();
 		turn_add();
+		turn_mymenu();
 		return view;
 	}
 
@@ -74,6 +75,65 @@ public class Fragment_Office extends Fragment {
 		oDatas.add(tab002);
 		oDatas.add(tab003);
 		oDatas.add(tab004);
+		
+		one.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				resetTextView();
+				oViewPager.setCurrentItem(0);
+				oOneTextView.setTextColor(Color.parseColor("#FFCC00"));
+				one.setBackgroundColor(Color.parseColor("#FFFFFF"));
+			}
+		});
+		
+		two.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				resetTextView();
+				oViewPager.setCurrentItem(1);
+				oTwoTextView.setTextColor(Color.parseColor("#FFCC00"));
+		    	two.setBackgroundColor(Color.parseColor("#FFFFFF"));
+			}
+		});
+		
+		three.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				resetTextView();
+				oViewPager.setCurrentItem(2);
+				oThreeTextView.setTextColor(Color.parseColor("#FFCC00"));
+		    	three.setBackgroundColor(Color.parseColor("#FFFFFF"));
+			}
+		});
+		
+		four.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				resetTextView();
+				oViewPager.setCurrentItem(3);
+				oFourTextView.setTextColor(Color.parseColor("#FFCC00"));
+		    	four.setBackgroundColor(Color.parseColor("#FFFFFF"));
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 		oAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
 
@@ -155,6 +215,7 @@ public class Fragment_Office extends Fragment {
 	private Button btn_more;
 	private void turn_add(){
 		btn_more = (Button) view.findViewById(R.id.btn_more);
+		btn_more.setText("新建");
 		btn_more.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -164,4 +225,17 @@ public class Fragment_Office extends Fragment {
 			}
 		});
 	}
+	private Button mymenu;
+	private void turn_mymenu(){
+		mymenu = (Button) view.findViewById(R.id.id_menu);
+		mymenu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(),MyMenu.class);
+				startActivity(intent);			
+				
+			}
+		});
+	}	
 }

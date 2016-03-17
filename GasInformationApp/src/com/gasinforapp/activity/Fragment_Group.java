@@ -3,16 +3,28 @@ package com.gasinforapp.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +34,7 @@ import com.gasinforapp.bean.Group;
 import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyErrorHelper;
 import com.gasinforapp.config.VolleyUtil;
+import com.gasinforapp.net.DeleteGroup;
 import com.gasinforapp.net.GroupList;
 import com.gasinforapp.net.GroupList.FailCallback;
 import com.gasinforapp.net.GroupList.SuccessCallback;
@@ -35,23 +48,45 @@ public class Fragment_Group extends Fragment implements
 	private PullToRefreshListView lvGroup;
 	private GroupAdapter adapter;
 	private List<Group> groupList;
-	private int pageNum = 2;
+	private int pageNum =9;
+	private Button button;
+	private Group temp;
+	private LinearLayout turn_contacts;
+	View view;
+	
+	private ListView actualListView;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.group_fragment, container, false);
+		view = inflater.inflate(R.layout.group_fragment, container, false);
 		// get view from layout
 		lvGroup = (PullToRefreshListView) view.findViewById(R.id.mylv);
-
+        button = (Button) view.findViewById(R.id.btn_more);
+        button.setText("新建");
 		groupList = new ArrayList<Group>();
 		adapter = new GroupAdapter(getActivity(), groupList);
 
-		ListView actualListView = lvGroup.getRefreshableView();
+		actualListView = lvGroup.getRefreshableView();
 		actualListView.setAdapter(adapter);
+		
+		turn_contacts = (LinearLayout) view.findViewById(R.id.turn_contacts);
+		turn_contacts.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(),Contacts_MainActivity.class);
+				startActivity(intent);	
+				
+			}
+		});
+		
+		
+		
 
+		
 		loadGroup();
 		setOnListener();
+		turn_mymenu();
 		return view;
 	}
 
@@ -137,11 +172,172 @@ public class Fragment_Group extends Fragment implements
 		 * 上拉下拉事件
 		 */
 		lvGroup.setOnRefreshListener(this);
+		
+		button.setOnClickListener(new View.OnClickListener(){
+			public void onClick(View v){
+						 
+			    if (v == button) {  
+					            Intent intent = new Intent(getActivity(), CreateGroupAty.class);  
+					            
+					             startActivity(intent);  
+					   
+					          }  
+				}
+			
+		});
+	
+		actualListView.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			public boolean onItemLongClick(AdapterView<?> arg0,
+	
+					View arg1, int arg2, long arg3) {
+	
+				temp = groupList.get(arg2 - 1);
+
+				lvGroup.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+	
+					public void onCreateContextMenu(ContextMenu menu,
+						
+							View arg1, ContextMenuInfo arg2) {
+
+						menu.setHeaderTitle(temp.getGroupName());
+
+						menu.add(0, 0, 0, "删除该群组");
+
+						menu.add(0, 1, 0, "查看资料");
+
+					}
+
+
+				});
+
+				return false;
+
+			}
+
+
+		
+		
+
+		});
+}
+
+
+
+	public boolean onContextItemSelected(MenuItem item) {
+
+			switch (item.getItemId()) {
+
+					case 0:deleteGroup();break;	
+					case 1:	break;
+
+			}
+
+			return super.onContextItemSelected(item);
+
+   }
+
+
+
+
+
+	private void deleteGroup() {
+
+			new DeleteGroup(MyConfig.getCachedAccount(getActivity()),MyConfig.getCachedToken(getActivity()),
+
+					temp.getGroupID(),new DeleteGroup.SuccessCallback() {				
+		@Override
+			public void onSuccess() {
+
+				new AsyncTask<Void, Void, Void>() {
+
+					@Override
+
+					protected Void doInBackground(Void... arg0) {
+
+						return null;
+					}
+
+					@Override
+
+					protected void onPostExecute(Void result) {
+
+						super.onPostExecute(result);
+
+                         Toast.makeText(getActivity(), "删除成功", Toast.LENGTH_LONG).show();
+
+					}
+
+				}.execute();
+			}
+
+		}, new DeleteGroup.FailCallback() {
+
+			@Override
+
+			public void onFail(int errorCode) {
+
+				new AsyncTask<Integer, Integer, Integer>() {
+
+					@Override
+
+					protected Integer doInBackground(Integer... error) {
+
+						return error[0];
+
+					}
+
+
+					@Override
+
+					protected void onPostExecute(Integer result) {
+
+						super.onPostExecute(result);
+
+						switch (result) {
+
+						    case MyConfig.RESULT_STATUS_INVALID_TOKEN:
+
+							   Toast.makeText(getActivity(),
+
+									  R.string.invalid_token,
+
+									     Toast.LENGTH_LONG).show();
+
+							                break;
+
+						default: Log.e("tag","deleteError"+ VolleyErrorHelper.getMessage(result,getActivity()));								
+
+							Toast.makeText(getActivity(),R.string.generic_error,	Toast.LENGTH_LONG).show();
+
+							break;
+
+						}
+
+					}
+
+				}.execute(errorCode);
+
+			}
+
+		});
+
+//
+		
+
+	
+	}
+
+
+	
+	protected EditText findViewById(Object groupName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
-		pageNum = 2;
+		pageNum = 9;
 		loadGroup();
 	}
 
@@ -158,4 +354,17 @@ public class Fragment_Group extends Fragment implements
 		VolleyUtil.getRequestQueue().cancelAll("getGroupListpost");
 	}
 
+	private Button mymenu;
+	private void turn_mymenu(){
+		mymenu = (Button) view.findViewById(R.id.id_menu);
+		mymenu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(),MyMenu.class);
+				startActivity(intent);			
+				
+			}
+		});
+	}
 }

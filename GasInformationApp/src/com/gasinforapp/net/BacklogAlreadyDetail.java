@@ -69,7 +69,7 @@ public class BacklogAlreadyDetail {
 										String requestTime = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
 										String textContent = newsObject
-												.optString(MyConfig.KEY_AFFAIRS_TEXTCONTENT);
+												.optString(MyConfig.KEY_AFFAIRS_MESSAGE);
 										String pictureUrl = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_PICTURES);
 										String department = newsObject

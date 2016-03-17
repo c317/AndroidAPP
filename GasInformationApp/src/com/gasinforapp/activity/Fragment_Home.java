@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -37,6 +38,12 @@ public class Fragment_Home extends Fragment {
 	private TextView mThreeTextView;
 	private TextView mFourTextView;
 	private TextView mFiveTextView;
+
+	private LinearLayout mOneLinearLayout;
+	private LinearLayout mTwoLinearLayout;
+	private LinearLayout mThreeLinearLayout;
+	private LinearLayout mFourLinearLayout;
+	private LinearLayout mFiveLinearLayout;
 	
 	View view;
 	
@@ -45,18 +52,11 @@ public class Fragment_Home extends Fragment {
 			Bundle savedInstanceState) {
 		
 		 view = inflater.inflate(R.layout.home_fragmentt, container, false);
-	/*	//搜索
-			Button btn=(Button)findViewById(R.id.btn_search);
-			btn.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					Intent intent = new Intent(Fragment_Home.this,SearchAty.class);
-					startActivity(intent);
-				}
-			});
-			//滑动调出菜单
-			mMenu = (home_SlidingMenu) findViewById(R.id.id_menu);*/
+		
+		 
 		initView();
+		turn_mysearch();
+		turn_mymenu();
 
 		return view;
 		
@@ -76,6 +76,11 @@ public class Fragment_Home extends Fragment {
 	mFourTextView=(TextView)view.findViewById(R.id.id_tv_four);
 	mFiveTextView=(TextView)view.findViewById(R.id.id_tv_five);
 	
+	mOneLinearLayout=(LinearLayout)view.findViewById(R.id.id_tv_one01);
+	mTwoLinearLayout=(LinearLayout)view.findViewById(R.id.id_tv_two01);
+	mThreeLinearLayout=(LinearLayout)view.findViewById(R.id.id_tv_three01);
+	mFourLinearLayout=(LinearLayout)view.findViewById(R.id.id_tv_four01);
+	mFiveLinearLayout=(LinearLayout)view.findViewById(R.id.id_tv_five01);
 	
 	
 	mDatas = new ArrayList<Fragment>();
@@ -108,7 +113,55 @@ public class Fragment_Home extends Fragment {
 	mViewPager.setAdapter(mAdapter);
 
 	
+	mOneLinearLayout.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			resetTextView();
+			mViewPager.setCurrentItem(0);
+			mOneTextView.setTextColor(Color.parseColor("#0066FF"));	
+		}
+	});
 	
+	mTwoLinearLayout.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			resetTextView();
+			mViewPager.setCurrentItem(1);
+			mTwoTextView.setTextColor(Color.parseColor("#0066FF"));	
+		}
+	});
+	
+	mThreeLinearLayout.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			resetTextView();
+			mViewPager.setCurrentItem(2);
+			mThreeTextView.setTextColor(Color.parseColor("#0066FF"));	
+		}
+	});
+	
+	mFourLinearLayout.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			resetTextView();
+			mViewPager.setCurrentItem(3);
+			mFourTextView.setTextColor(Color.parseColor("#0066FF"));	
+		}
+	});
+	
+	mFiveLinearLayout.setOnClickListener(new OnClickListener() {
+		@Override
+		public void onClick(View arg0) {
+			// TODO Auto-generated method stub
+			resetTextView();
+			mViewPager.setCurrentItem(4);
+			mFiveTextView.setTextColor(Color.parseColor("#0066FF"));	
+		}
+	});
 	
 	mViewPager.setOnPageChangeListener(
 			
@@ -150,14 +203,7 @@ public class Fragment_Home extends Fragment {
 		public void onPageScrollStateChanged(int arg0) {
 			
 		}
-	});
-	
-
-		
-		
-
-	
-	
+	});	
 		
 	Intent getintent = getActivity().getIntent();
 	Bundle bundle = getintent.getExtras();
@@ -175,5 +221,41 @@ public class Fragment_Home extends Fragment {
 		mFourTextView.setTextColor(Color.parseColor("#BCBCBC"));
 		mFiveTextView.setTextColor(Color.parseColor("#BCBCBC"));
 
+	}
+	
+	
+	
+	
+	
+	private Button mymenu;
+	private void turn_mymenu(){
+		mymenu = (Button) view.findViewById(R.id.id_menu);
+		mymenu.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(),MyMenu.class);
+				startActivity(intent);			
+				
+			}
+		});
+	}	
+	
+	
+	
+	
+	
+	private Button mysearch;
+	private void turn_mysearch(){
+		mysearch = (Button) view.findViewById(R.id.btn_search);
+		mysearch.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent(getActivity(),SearchAty.class);
+				startActivity(intent);			
+				
+			}
+		});
 	}
 }

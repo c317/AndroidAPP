@@ -12,6 +12,7 @@
         android:orientation="horizontal" >
         
         <LinearLayout 
+            android:id="@+id/id_tv_one01"
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -26,6 +27,7 @@
         </LinearLayout>
         
         <LinearLayout 
+            android:id="@+id/id_tv_two01"
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -43,7 +45,7 @@
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
+            android:id="@+id/id_tv_three01"
             android:gravity="center" >
 
             <TextView
@@ -59,7 +61,7 @@
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
+            android:id="@+id/id_tv_four01"
             android:gravity="center" >
 
             <TextView
@@ -75,7 +77,7 @@
             android:layout_width="3dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            
+            android:id="@+id/id_tv_five01"
             android:gravity="center" >
 
             <TextView

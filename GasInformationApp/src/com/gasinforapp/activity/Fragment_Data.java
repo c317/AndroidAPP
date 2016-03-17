@@ -1,5 +1,7 @@
 package com.gasinforapp.activity;
-
+/**
+ * 主页中数据页面
+ */
 import java.util.ArrayList;
 import java.util.List;
 

@@ -6,7 +6,7 @@
     android:orientation="vertical" >
     <include layout="@layout/group_contacts_top" />
 
-    <com.gasinforapp.sortlistview.ClearEditText
+    <com.gasinforapp.activity.Contacts_ClearEditText
         android:id="@+id/filter_edit"
         android:layout_marginTop="2dip"
         android:layout_marginLeft="5dp"
@@ -14,6 +14,7 @@
         android:layout_marginBottom="2dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/contacts_search_bar_edit_selector"
         android:drawableLeft="@drawable/search_bar_icon_normal"
         android:hint="请输入关键字"
         android:singleLine="true"
@@ -41,7 +42,7 @@
             android:textSize="30.0dip"
             android:visibility="invisible" />
 
-        <com.gasinforapp.sortlistview.SideBar
+        <com.gasinforapp.activity.Contacts_SideBar
             android:id="@+id/sidrbar"
             android:layout_marginTop="5dip"
        		android:layout_marginLeft="5dip"

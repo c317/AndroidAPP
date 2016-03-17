@@ -3,16 +3,19 @@ package com.gasinforapp.activity;
 /**
  * 填写办公申请页面
  */
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -34,7 +37,6 @@ import com.gasinforapp.config.MyConfig;
 import com.gasinforapp.config.VolleyErrorHelper;
 import com.gasinforapp.net.BacklogRequest;
 import com.gasinforapp.net.MembersList;
-import com.gasinforapp.uploadtest.PostUploadActivity;
 import com.gasinforapp.uploadtest.ResponseListener;
 import com.gasinforapp.uploadtest.UploadApi;
 import com.gasinforapp.widget.MultiSpinner;
@@ -55,11 +57,13 @@ public class NewAffairRequestAty extends Activity {
 	private List<User> list_approver;
 	private List<String> list_aname;
 	// 数据
-	private Bitmap bmp;
+	private File file;
 	private String approverId = "";
-	private String path = "";
-	private Boolean flag = false;
-
+	private String picURL = "";//得到本地图片路径
+	private String URL = "";//请求服务器时发送的图片路径
+	private final String IMAGE_TYPE = "image/*";
+	private final int IMAGE_CODE = 0; // 这里的IMAGE_CODE是自己任意定义的
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -69,7 +73,9 @@ public class NewAffairRequestAty extends Activity {
 		list_approver = new ArrayList<User>();
 		getApproverList();
 		clickAddFileBtn();
+
 		clickSendBtn();
+
 		back.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {
@@ -77,7 +83,9 @@ public class NewAffairRequestAty extends Activity {
 			}
 		});
 	}
-
+/**
+ * 发送申请
+ */
 	private void clickSendBtn() {
 
 		btn_send.setOnClickListener(new OnClickListener() {
@@ -95,91 +103,224 @@ public class NewAffairRequestAty extends Activity {
 					Toast.makeText(NewAffairRequestAty.this, "请填写内容",
 							Toast.LENGTH_LONG).show();
 				} else {
-					// 主要信息和文件分开提交 1、不包括图片文件的部分
-					new BacklogRequest(MyConfig
-							.getCachedUserid(NewAffairRequestAty.this) + "",
-							MyConfig.getCachedToken(NewAffairRequestAty.this),
-							approverId, et_title.getText().toString(), "",
-							et_content.getText().toString(), "0",
-							new BacklogRequest.SuccessCallback() {
 
-								@Override
-								public void onSuccess() {
-									new AsyncTask<Void, Void, Void>() {
-										@Override
-										protected Void doInBackground(
-												Void... arg0) {
-											return null;
-										}
-
-										@Override
-										protected void onPostExecute(Void result) {
-											super.onPostExecute(result);
-											Toast.makeText(
-													NewAffairRequestAty.this,
-													"申请已成功提交",
-													Toast.LENGTH_LONG).show();
-										}
-									}.execute();
-								}
-							}, new BacklogRequest.FailCallback() {
-
-								@Override
-								public void onFail(int errorCode) {
-									new AsyncTask<Integer, Void, Integer>() {
-
-										@Override
-										protected Integer doInBackground(
-												Integer... arg0) {
-											return arg0[0];
-										}
-
-										@Override
-										protected void onPostExecute(
-												Integer result) {
-											super.onPostExecute(result);
-											Log.e(TAG,
-													VolleyErrorHelper
-															.getMessage(
-																	result,
-																	NewAffairRequestAty.this));
-											Toast.makeText(
-													NewAffairRequestAty.this,
-													R.string.generic_error,
-													Toast.LENGTH_LONG).show();
-										}
-									}.execute(errorCode);
-								}
-							});
-					// 2、上传文件
-					if (bmp != null) {
-						UploadApi.uploadImg(bmp,
+					// 1、存在图片上传，先上传图片，成功后提交申请详情文字
+					if (file != null) {
+						UploadApi.uploadImg(file,
 								new ResponseListener<String>() {
 									@Override
 									public void onErrorResponse(
 											VolleyError error) {
-										Log.v(TAG,
-												"===========VolleyError========="
-														+ error);
-										Toast.makeText(
-												NewAffairRequestAty.this,
-												"附件上传失败", Toast.LENGTH_SHORT)
-												.show();
+										new AsyncTask<VolleyError, Void, VolleyError>() {
+
+											@Override
+											protected VolleyError doInBackground(
+													VolleyError... arg0) {
+												return arg0[0];
+											}
+
+											@Override
+											protected void onPostExecute(
+													VolleyError result) {
+												super.onPostExecute(result);
+												Log.v(TAG,
+														"===========VolleyError========="
+																+ result);
+												Toast.makeText(
+														NewAffairRequestAty.this,
+														"图片上传失败，请重试",
+														Toast.LENGTH_SHORT)
+														.show();
+											}
+										}.execute(error);
+
 									}
 
 									@Override
 									public void onResponse(String response) {
-										response = response.substring(response
-												.indexOf("img src="));
-										response = response.substring(8,
-												response.indexOf("/>"));
-										Log.v(TAG,
-												"===========onResponse========="
-														+ response);
-										Toast.makeText(
-												NewAffairRequestAty.this,
-												"附件上传成功", Toast.LENGTH_SHORT)
-												.show();
+										new AsyncTask<String, Void, String>() {
+
+											@Override
+											protected String doInBackground(
+													String... arg0) {
+												return arg0[0];
+											}
+
+											@Override
+											protected void onPostExecute(
+													String response) {
+												super.onPostExecute(response);
+												Log.v(TAG,
+														"===========onResponse========="
+																+ response);
+												Toast.makeText(
+														NewAffairRequestAty.this,
+														"附件上传成功",
+														Toast.LENGTH_SHORT)
+														.show();
+												try {
+													JSONObject obj = new JSONObject(
+															response);
+													System.out
+															.println(response);
+													switch (obj
+															.optInt(MyConfig.KEY_STATUS)) {
+													case MyConfig.RESULT_STATUS_SUCCESS:
+														String picurl = obj
+																.optString(MyConfig.KEY_PIC_URL);
+														URL = picurl;
+														//上传好文件后提交申请详情文字
+														new BacklogRequest(
+																MyConfig.getCachedUserid(NewAffairRequestAty.this)
+																		+ "",
+																MyConfig.getCachedToken(NewAffairRequestAty.this),
+																approverId,
+																et_title.getText()
+																		.toString(),
+																"",
+																et_content
+																		.getText()
+																		.toString(),
+																URL,
+																new BacklogRequest.SuccessCallback() {
+
+																	@Override
+																	public void onSuccess() {
+																		new AsyncTask<Void, Void, Void>() {
+																			@Override
+																			protected Void doInBackground(
+																					Void... arg0) {
+																				return null;
+																			}
+
+																			@Override
+																			protected void onPostExecute(
+																					Void result) {
+																				super.onPostExecute(result);
+																				Toast.makeText(
+																						NewAffairRequestAty.this,
+																						"成功提交",
+																						Toast.LENGTH_LONG)
+																						.show();
+																				NewAffairRequestAty.this.finish();
+																			}
+																		}.execute();
+																	}
+																},
+																new BacklogRequest.FailCallback() {
+
+																	@Override
+																	public void onFail(
+																			int errorCode) {
+																		new AsyncTask<Integer, Void, Integer>() {
+
+																			@Override
+																			protected Integer doInBackground(
+																					Integer... arg0) {
+																				return arg0[0];
+																			}
+
+																			@Override
+																			protected void onPostExecute(
+																					Integer result) {
+																				super.onPostExecute(result);
+																				Log.e(TAG,
+																						VolleyErrorHelper
+																								.getMessage(
+																										result,
+																										NewAffairRequestAty.this));
+																				Toast.makeText(
+																						NewAffairRequestAty.this,
+																						R.string.generic_error,
+																						Toast.LENGTH_LONG)
+																						.show();
+																			}
+																		}.execute(errorCode);
+																	}
+																});
+														break;
+													default:
+														Toast.makeText(
+																NewAffairRequestAty.this,
+																"图片上传失败，请重试",
+																Toast.LENGTH_SHORT)
+																.show();
+														break;
+													}
+												} catch (JSONException e) {
+													Toast.makeText(
+															NewAffairRequestAty.this,
+															"图片上传失败，请重试",
+															Toast.LENGTH_SHORT)
+															.show();
+													e.printStackTrace();
+												}
+
+											}
+										}.execute(response);
+									}
+								});
+					} else {
+						// 2\没有图片内容的申请
+						new BacklogRequest(
+								MyConfig.getCachedUserid(NewAffairRequestAty.this)
+										+ "",
+								MyConfig.getCachedToken(NewAffairRequestAty.this),
+								approverId, et_title.getText().toString(), "",
+								et_content.getText().toString(),
+								"",
+								new BacklogRequest.SuccessCallback() {
+
+									@Override
+									public void onSuccess() {
+										new AsyncTask<Void, Void, Void>() {
+											@Override
+											protected Void doInBackground(
+													Void... arg0) {
+												return null;
+											}
+
+											@Override
+											protected void onPostExecute(
+													Void result) {
+												super.onPostExecute(result);
+												Toast.makeText(
+														NewAffairRequestAty.this,
+														"申请已成功提交",
+														Toast.LENGTH_LONG)
+														.show();
+												NewAffairRequestAty.this.finish();
+											}
+										}.execute();
+									}
+								}, new BacklogRequest.FailCallback() {
+
+									@Override
+									public void onFail(int errorCode) {
+										new AsyncTask<Integer, Void, Integer>() {
+
+											@Override
+											protected Integer doInBackground(
+													Integer... arg0) {
+												return arg0[0];
+											}
+
+											@Override
+											protected void onPostExecute(
+													Integer result) {
+												super.onPostExecute(result);
+												Log.e(TAG,
+														VolleyErrorHelper
+																.getMessage(
+																		result,
+																		NewAffairRequestAty.this));
+												Toast.makeText(
+														NewAffairRequestAty.this,
+														R.string.generic_error,
+														Toast.LENGTH_LONG)
+														.show();
+											}
+										}.execute(errorCode);
 									}
 								});
 					}
@@ -198,8 +339,11 @@ public class NewAffairRequestAty extends Activity {
 		back = (Button) findViewById(R.id.back01);
 		tv_path = (TextView) findViewById(R.id.tv_path);
 		iv_file = (ImageView) findViewById(R.id.iv_file);
+		btn_send.setText("发送");
 	}
-
+/**
+ * 获取审批领导列表
+ */
 	private void getApproverList() {
 
 		new MembersList(
@@ -257,11 +401,12 @@ public class NewAffairRequestAty extends Activity {
 
 	}
 
-	// /获取图片及路径**********************
 
-	private final String IMAGE_TYPE = "image/*";
-	private final int IMAGE_CODE = 0; // 这里的IMAGE_CODE是自己任意定义的
 
+
+	/**
+	 * 获取图片及路径**********************
+	 */
 	private void clickAddFileBtn() {
 		btn_addfile.setOnClickListener(new OnClickListener() {
 
@@ -295,14 +440,13 @@ public class NewAffairRequestAty extends Activity {
 		if (requestCode == IMAGE_CODE) {
 			try {
 				Uri originalUri = data.getData(); // 获得图片的uri
-
 				bm = MediaStore.Images.Media.getBitmap(resolver, originalUri); // 得到bitmap图片
 				iv_file.setImageBitmap(bm);
-				this.bmp = bm;
 
 				String[] proj = { MediaStore.Images.Media.DATA };
 
 				// 好像是android多媒体数据库的封装接口，具体的看Android文档
+				@SuppressWarnings("deprecation")
 				Cursor cursor = managedQuery(originalUri, proj, null, null,
 						null);
 				// 按我个人理解 这个是获得用户选择的图片的索引值
@@ -312,11 +456,13 @@ public class NewAffairRequestAty extends Activity {
 				cursor.moveToFirst();
 				// 最后根据索引值获取图片路径
 				String path = cursor.getString(column_index);
-				this.path = path;
-				tv_path.setText(path);
+				file = new File(path);
+				this.picURL = path;
+				tv_path.setText(picURL);
 			} catch (IOException e) {
 				Log.e(TAG, e.toString());
 			}
 		}
 	}
+
 }

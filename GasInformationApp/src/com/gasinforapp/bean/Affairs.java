@@ -19,6 +19,8 @@ public class Affairs {
 	private String textContent;
 	// 请求图片
 	private String pictures;
+	// 请求图片URL
+	private String picURL;
 	// 审批角色
 	private String approverRole;
 	// 回复时间
@@ -84,6 +86,13 @@ public class Affairs {
 
 	public void setTextContent(String textContent) {
 		this.textContent = textContent;
+	}
+	public String getPicURL() {
+		return picURL;
+	}
+
+	public void setPicURL(String picURL) {
+		this.picURL = picURL;
 	}
 
 	public String getApproverRole() {

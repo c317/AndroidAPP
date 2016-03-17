@@ -21,6 +21,7 @@
             /> -->
             
             <Button
+                android:id="@+id/id_menu"
                 android:onClick="toggleMenu"
                 android:layout_width="30dp"
       			android:layout_height="30dp"

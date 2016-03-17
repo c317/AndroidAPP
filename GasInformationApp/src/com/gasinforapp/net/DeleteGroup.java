@@ -17,12 +17,12 @@ import com.gasinforapp.config.VolleyUtil;
 
 public class DeleteGroup {
 
-	public DeleteGroup(final String account, final String token,
+	public DeleteGroup(final String userID, final String token,
 			final int groupID, final SuccessCallback successCallback,
 			final FailCallback failCallback) {
 
 		StringRequest stringRequest = new StringRequest(Request.Method.POST,
-				MyConfig.SERVER_URL + MyConfig.ACTION_GETNEWS,
+				MyConfig.SERVER_URL_GROUP + MyConfig.ACTION_DELETEGROUP,
 				new Response.Listener<String>() {
 
 					@Override
@@ -64,8 +64,8 @@ public class DeleteGroup {
 				// 在这里设置需要post的参数
 				Map<String, String> map = new HashMap<String, String>();
 				map.put(MyConfig.KEY_GROUPID, groupID + "");
-				map.put(MyConfig.KEY_GROUPNAME, account);
-				map.put(MyConfig.KEY_PASSWORD, token);
+				map.put(MyConfig.KEY_USERID, userID);
+				map.put(MyConfig.KEY_TOKEN, token);
 				return map;
 			}
 		};

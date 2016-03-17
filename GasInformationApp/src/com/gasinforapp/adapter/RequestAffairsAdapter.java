@@ -49,6 +49,8 @@ public class RequestAffairsAdapter extends BaseAdapter {
 					.findViewById(R.id.tvAffairApprover);
 			holder.tvRequsetTime = (TextView) convertView
 					.findViewById(R.id.tvAffairPubTime);
+			holder.tvStatus = (TextView) convertView
+					.findViewById(R.id.tv_status);
 			convertView.setTag(holder);
 		} else {
 			holder = (Holder) convertView.getTag();
@@ -57,6 +59,7 @@ public class RequestAffairsAdapter extends BaseAdapter {
 		holder.tvTitle.setText(affairs.getRequestTitle());
 		holder.tvApprover.setText(affairs.getApprover());
 		holder.tvRequsetTime.setText(affairs.getRequestTime());
+		holder.tvStatus.setText(getStatus(affairs.getOpinion()));
 		return convertView;
 	}
 
@@ -74,6 +77,18 @@ public class RequestAffairsAdapter extends BaseAdapter {
 		private TextView tvRequsetTime;
 		private TextView tvApprover;
 		private TextView tvTitle;
+		private TextView tvStatus;
+	}
+	private String getStatus(int s){
+		if(s == 0){
+			return "未批准";
+		}
+		else if(s == 1){
+			return "已批准";
+		}else if(s == 2){
+			return "需修改";
+		}
+		return "";
 	}
 
 }

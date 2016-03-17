@@ -57,10 +57,18 @@
     
     <style name="Animation">
 
-    	<item name="android:activityOpenEnterAnimation">@anim/translucent_enter</item>  
+        
+       <!--  zinctar-渐变切换activity -->
+    	<!-- <item name="android:activityOpenEnterAnimation">@anim/translucent_enter</item>  
         <item name="android:activityOpenExitAnimation">@anim/translucent_exit</item>  
         <item name="android:activityCloseEnterAnimation">@anim/translucent_enter</item>  
-        <item name="android:activityCloseExitAnimation">@anim/translucent_exit</item>  
+        <item name="android:activityCloseExitAnimation">@anim/translucent_exit</item>  --> 
+        
+        <!--  zinctar-左右滑动切换activity -->
+        <item name="android:activityOpenEnterAnimation">@anim/slide_right_in</item>  
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_out</item>  
+        <item name="android:activityCloseEnterAnimation">@anim/slide_left_in</item>  
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_out</item>  
         
 <!--        <item name="android:taskOpenEnterAnimation">@null</item>-->
 <!--        <item name="android:taskOpenExitAnimation">@null</item>-->

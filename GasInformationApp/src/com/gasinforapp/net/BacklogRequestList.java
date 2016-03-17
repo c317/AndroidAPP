@@ -71,6 +71,8 @@ public class BacklogRequestList {
 												.optString(MyConfig.KEY_AFFAIRS_DEPARTMENT);
 										String requestTime = newsObject
 												.optString(MyConfig.KEY_AFFAIRS_REQUESTTIME);
+										int status = newsObject
+												.optInt(MyConfig.KEY_AFFAIRS_STATUS);
 
 										Affairs as = new Affairs();
 										as.setItemId(itemId);
@@ -79,6 +81,7 @@ public class BacklogRequestList {
 										as.setRequestTitle(title);
 										as.setDepartment(department);
 										as.setRequestTime(requestTime);
+										as.setOpinion(status);
 										officeRequestItems.add(as);
 									}
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
+import com.example.gasinformationapp_101.R;
 import com.gasinforapp.utils.ScreenUtils;
 import com.nineoldandroids.view.ViewHelper;
 

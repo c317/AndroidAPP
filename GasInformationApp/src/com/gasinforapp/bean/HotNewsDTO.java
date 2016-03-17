@@ -15,6 +15,8 @@ public class HotNewsDTO {
 	private String lastTime;
 	//是否已读
 	private boolean isRead;
+	//是否收藏
+	private boolean isCollect;
 	public int getId() {
 		return id;
 	}
@@ -66,6 +68,26 @@ public class HotNewsDTO {
 	 */
 	public int getReadStatus(){
 		if(this.isRead){
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+	public boolean isCollect() {
+		return isCollect;
+	}
+	public void setCollect(int isCollect) {
+		if(isCollect==1){
+			this.isCollect = true;
+		}else{
+			this.isCollect = false;
+		}
+	}
+	/**
+	 * SQLite数据库存储boolean类型为整型,需要转换
+	 */
+	public int getCollectStatus(){
+		if(this.isCollect){
 			return 1;
 		}else{
 			return 0;

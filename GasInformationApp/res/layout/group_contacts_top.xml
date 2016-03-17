@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android1:layout_gravity="center_horizontal"
-            android:text="搜索"
+            android:text="通讯录"
             android:textColor="#666666"
             android:textSize="18sp" />
     </LinearLayout>

@@ -5,11 +5,12 @@ import android.content.SharedPreferences.Editor;
 
 public  class MyConfig {
 
-	public static final String SERVER_URL =  "http://192.168.0.101:8080/GasInformationAppS/home/";
-	public static final String SERVER_URL_OA =  "http://192.168.0.101:8080/GasInformationAppS/work/";
-	public static final String SERVER_URL_GROUP =  "http://192.168.0.101:8080/GasInformationAppS/group/";
-	public static final String SERVER_URL_WORK =  "http://192.168.0.101:8080/GasInformationAppS/work/";
-	public static final String SERVER_URL_UPLOAD =  "http://";
+	public static final String SERVER_URL =  "http://192.168.0.110:8080/GasInformationAppS/home/";
+	public static final String SERVER_URL_OA =  "http://192.168.0.110:8080/GasInformationAppS/work/";
+	public static final String SERVER_URL_GROUP =  "http://192.168.0.110:8080/GasInformationAppS/group/";
+	public static final String SERVER_URL_WORK =  "http://192.168.0.110:8080/GasInformationAppS/work/";
+	public static final String SERVER_URL_UPLOAD =  "http://192.168.0.110:8080/GasInformationAppS/fileUpLoad/";
+	public static final String SERVER_URL_PERSONAL =  "http://192.168.0.110:8080/GasInformationAppS/personalSetting/";
 //	public static final String SERVER_URL =  "http://darmin.hicp.net:17504/GasInformationAppS/home/";
 //	public static final String SERVER_URL_OA =  "http://darmin.hicp.net:17504/GasInformationAppS/oa/";
 //	public static final String SERVER_URL_GROUP =  "http://darmin.hicp.net:17504/GasInformationAppS/group/";
@@ -17,10 +18,13 @@ public  class MyConfig {
 	public static final int 	  MODULEID_HOTSPOT= 7;
 	public static final int 	  MODULEID_TOPIC= 8;
 	public static final int 	  MODULEID_DATA= 9;
+	public static final int 	  MODULEID_FILE= 9;
 	
 	public static final String CHARSET = "utf-8";
 	public static final String APP_ID = "com.gasinforapp";
 	
+	//下载文件文件夹地址
+	public static final String APP_DOWNPATH = "/storage/emulated/0/down/";
 	//统一参数名
 	public static final String KEY_TOKEN = "token";
 	public static final String KEY_ACTION = "action";
@@ -38,8 +42,11 @@ public  class MyConfig {
 	public static final String KEY_CONTENT = "content";
 	public static final String KEY_USERNAME = "username";
 	public static final String KEY_USER_ACCOUNT = "account";
+	public static final String KEY_USER = "user";
 	public static final String KEY_USERID = "userID";
 	public static final String KEY_PASSWORD = "password";
+	public static final String KEY_OLDPASSWORD = "oldPassword";
+	public static final String KEY_NEWPASSWORD = "newPassword";
 	public static final String KEY_GROUPS = "group";
 	public static final String KEY_GROUPNAME = "groupName";
 	public static final String KEY_GROUPID = "groupID";
@@ -75,8 +82,12 @@ public  class MyConfig {
 	public static final String KEY_AFFAIRS_APPROVERID = "approverId";
 	public static final String KEY_AFFAIRS_APPROVER = "approver";
 	public static final String KEY_AFFAIRS_TITLE = "requestTitle";
+	public static final String KEY_AFFAIRS_STATUS = "status";
+	public static final String KEY_AFFAIRS_SETTLED = "settled";
 	public static final String KEY_AFFAIRS_TEXTCONTENT = "textContent";
-	public static final String KEY_AFFAIRS_PICTURES = "pictureUrl";
+	public static final String KEY_AFFAIRS_MESSAGE = "message";
+	public static final String KEY_AFFAIRS_PICTURES = "picture";
+	public static final String KEY_AFFAIRS_PICTURES_URL = "pictureUrl";
 	public static final String KEY_AFFAIRS_DEPARTMENT = "department";
 	public static final String KEY_AFFAIRS_REQUESTTIME = "requestTime";
 	public static final String KEY_AFFAIRS_REPLYTIME = "replyTime";
@@ -93,6 +104,7 @@ public  class MyConfig {
 	public static final String KEY_DATA_CONTENT = "content";
 	public static final String KEY_DATA_FILENAME = "fileName";
 	public static final String KEY_DATA_URL = "URL";
+	public static final String KEY_PIC_URL = "URL";
 	
 	
 	public static final String ACTION_LOGIN = "loginAction";
@@ -124,6 +136,11 @@ public  class MyConfig {
 	public static final String ACTION_SENDAFFAIRSREPLY = "examineOfficeRequest";
 	public static final String ACTION_GETRECENTNEWS = "getRecentNews";
 	public static final String ACTION_FREGUENTQUERY = "frequentQuery";
+	public static final String ACTION_FILE_UPLOAD = "fileUpLoad";
+	public static final String ACTION_PERSONAL_INFOR = "getPersonalInformation";
+	public static final String ACTION_PERSONAL_CHAGEPASSWORD = "changePassword";
+	public static final String ACTION_CREATEGROUP = "addGroup";
+	public static final String ACTION_DELETEGROUP = "deleteGroup";
 	
 	public static final int RESULT_STATUS_SUCCESS = 1;
 	public static final int RESULT_STATUS_FAIL = 0;
@@ -132,7 +149,11 @@ public  class MyConfig {
 	public static final int RESULT_STATUS_PASSWORD_ERROR= 2;//没找到被操做的人
 	public static final int RESULT_STATUS_REPEATED = 4;//重复添加
 	
-
+public static final int FILETYPE_IMAGE=1;
+public static final int FILETYPE_WORD=2;
+public static final int FILETYPE_EXCEL=3;
+public static final int FILETYPE_PPT=4;
+	
 	public static final int ACTIVITY_RESULT_NEED_REFRESH = 10000;
 	//是否进入群聊界面标志
 	public static Boolean CHATING_FLAG = false; 
@@ -231,6 +252,23 @@ public  class MyConfig {
 	public static void cacheUserid(Context context,int userId){
 		Editor e = context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).edit();
 		e.putInt(KEY_USERID, userId);
+		e.commit();
+	}
+	/**
+	 * @param context
+	 * @return 缓存
+	 */
+	public static String getCached(Context context){
+		return context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).getString("cache_key", null);
+	}
+	/**
+	 * 将**缓存
+	 * @param context
+	 * @param cache_value
+	 */
+	public static void cache(Context context,String cache_value){
+		Editor e = context.getSharedPreferences(APP_ID, Context.MODE_PRIVATE).edit();
+		e.putString("cache_key", cache_value);
 		e.commit();
 	}
 }
