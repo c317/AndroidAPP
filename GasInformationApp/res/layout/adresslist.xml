@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="#FFFFFF"
+    android:paddingTop="1dp"
+    android:paddingBottom="1dp"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp"
+>
+<!--     android:paddingLeft="12dp"
+    android:paddingRight="12dp" -->   
+    
+    
+<LinearLayout 
+    android:id="@+id/turn_contacts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_weight="1" 
+    android:background="@drawable/layout_selector"
+    android:clickable="true"
+>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<ImageView 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/me_follow"
+            />
+
+            <TextView
+            android:paddingLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="通讯录"
+            android:textColor="#646464"
+            android:textSize="17sp"
+            />
+</LinearLayout>
+</LinearLayout>
+            <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="|"
+            android:textColor="#DCDCDC"
+            android:textSize="18sp"
+            />
+<!--  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:layout_weight="1"
+    android:background="@drawable/layout_selector"
+    android:clickable="true"
+>
+     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal">
+<ImageView 
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/me_follower"
+            />
+
+            <TextView
+            android:paddingLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="项目组"
+            android:textColor="#646464"
+            android:textSize="17sp"
+            />
+
+</LinearLayout>   
+</LinearLayout>  -->
+    
+</LinearLayout>  
+
+</LinearLayout>

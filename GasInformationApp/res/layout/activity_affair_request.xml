@@ -1,0 +1,131 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+<include layout="@layout/topbar_affaircontent"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E4E4E4"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="标题xxxxx"
+        android:textColor="#A0A0A0"
+        android:textSize="20dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="状态:" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxxx" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请人部门:" />
+
+        <TextView
+            android:id="@+id/tv_department"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXXX" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请人:" />
+
+        <TextView
+            android:id="@+id/tv_applicant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xxx" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="申请时间:" />
+
+        <TextView
+            android:id="@+id/tv_pubtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XX年X月X日" />
+    </LinearLayout>
+</LinearLayout>
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:padding="10dp"
+           android:background="#ffffff"
+           android:orientation="vertical" >
+	    
+           <TextView
+               android:textColor="#A0A0A0"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="审批内容:" />
+          
+
+      <TextView
+               android:id="@+id/tv_content"
+               android:padding="5dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:minLines="5"
+               android:layout_weight="0.35"
+               android:text="TextView" />
+			
+	    <Button
+                android:background="@drawable/chat_send_butt"
+                android:layout_marginTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+		        android:id="@+id/btn_download"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="下载附件"
+		        android:textColor="#ffffff"
+		        android:gravity="left" /> 
+        </LinearLayout>
+</LinearLayout>

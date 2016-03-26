@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    
+    
+    android:orientation="vertical" >
+
+
+    <TextView
+        android:id="@+id/catalog"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textColor="#00BFFF"
+        android:layout_weight="1.0"
+        android:paddingTop="5dip"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="8dp"
+        android:paddingBottom="5dip"
+        android:text="A"/>
+
+    <LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal" >
+    <TextView
+        android:id="@+id/staff_dept"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="0.8"
+        android:textColor="#A9A9A9"
+        android:layout_marginLeft="8dip"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="技术部"/>
+    <TextView
+        android:id="@+id/staff_name"  
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="1.0"
+        android:textColor="#191919"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="李四"/>
+        <TextView
+        android:id="@+id/staff_number"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:layout_weight="0.7"
+        android:textColor="#191919"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:text="1562525412"/>
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,121 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+<include layout="@layout/topbar_affaircontent"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#E0E0E0"
+    android:orientation="vertical"
+    android:padding="10dp"
+     >
+ <TextView
+    android:id="@+id/tv_title"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="title"
+    android:textColor="#A0A0A0"
+    android:textSize="20dp"
+    android:layout_marginBottom="5dp"
+    />
+<!-- <TextView
+    android:id="@+id/tv_applicant"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="applicant"
+    /> -->
+<TextView
+    android:id="@+id/tv_department"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="department"
+    />
+
+<TextView
+    android:id="@+id/tv_content"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="content"
+    />   
+    
+    
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:padding="10dp"
+     >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+	android:layout_marginTop="5dp"
+	android:layout_marginBottom="5dp"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:textColor="@color/deepskyblue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="状态:" />
+
+    <TextView
+        android:textColor="@color/deepskyblue"
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="xxxx" />
+
+</LinearLayout>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复时间:" />
+
+    <TextView
+        android:id="@+id/tv_reponsetime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="time" />
+</LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="回复内容:" />
+<TextView 
+    android:id="@+id/tv_reply"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="reply"
+    />
+</LinearLayout>
+     <Button
+        android:id="@+id/btn_download"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/chat_send_butt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#ffffff"
+        android:text="下载附件" /> 
+        </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android1="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:background="@drawable/boder01"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp" >
+
+    <!-- 可将背景色换成：       android:background="@drawable/top1_bg" -->
+
+    <LinearLayout
+        android:id="@+id/back00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="horizontal" >
+
+       <Button
+            android:id="@+id/back01"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/action_back"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android1:id="@+id/topname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android1:layout_gravity="center_horizontal"
+            android:text="添加成员"
+            android:textColor="#666666"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>
