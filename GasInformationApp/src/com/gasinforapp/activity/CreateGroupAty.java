@@ -28,8 +28,9 @@ public class CreateGroupAty extends Activity {
 		back = (LinearLayout) findViewById(R.id.back00);
 		et_groupName = (EditText) findViewById(R.id.groupName);
 		
+		
 		back.setOnClickListener(new OnClickListener() {
-
+				@Override
 			public void onClick(View arg0) {
 				finish();
 			}
