@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,7 +31,7 @@ public class Contacts_MainActivity extends Activity {
 	private TextView dialog;
 	private Contacts_SortAdapter adapter;
 	private Contacts_ClearEditText mClearEditText;
-	private Button back;
+	private LinearLayout back;
 
 	/**
 	 * 汉字转换成拼音的类
@@ -48,7 +49,7 @@ public class Contacts_MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.group_contacts);
 		initViews();
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		back.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {

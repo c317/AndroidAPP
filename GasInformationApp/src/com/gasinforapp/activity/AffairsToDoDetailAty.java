@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class AffairsToDoDetailAty extends Activity {
 	private TextView tvApplicant;
 	private TextView tvpubtime;
 	private TextView tvcontent;
-	private Button back;
+	private LinearLayout back;
 	private Button btn_examine;
 	private String itemId;
 	private String aftitle;
@@ -42,7 +43,7 @@ public class AffairsToDoDetailAty extends Activity {
 	private String afpicurl;
 	private String afpicname;
 	private TextView myTextView;  
-
+	private int flag=0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class AffairsToDoDetailAty extends Activity {
 		tvDepartment = (TextView) findViewById(R.id.tv_department);
 		tvpubtime = (TextView) findViewById(R.id.tv_pubtime);
 		tvcontent = (TextView) findViewById(R.id.tv_content);
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		btn_examine = (Button) findViewById(R.id.btn_more);
 		btn_examine.setText("审批");
 	}
@@ -164,11 +165,15 @@ public class AffairsToDoDetailAty extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				if(flag==0){
 				down(downloadURL + afpicurl);
 				MediaScannerConnection.scanFile(AffairsToDoDetailAty.this,
 						new String[] { path + afpicname }, null, null);
+				flag = 1;
+				btn_download.setText("打开附件");
+				}else{
 				Intent intent = MyIntent.getImageFileIntent(path+afpicname);
-				startActivity(intent);
+				startActivity(intent);}
 			}
 		});
 	}

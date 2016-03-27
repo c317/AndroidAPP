@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -32,7 +33,7 @@ public class CollectedNewsAty extends Activity implements
 	private int numsPerPage = 10;
 	private GasInforDataBaseHelper dataBaseHelper;
 	private TextView myTextView; 
-	private Button back;
+	private LinearLayout back;
 
 	@Override
 	public void onResume() {
@@ -48,7 +49,7 @@ public class CollectedNewsAty extends Activity implements
 		 myTextView = (TextView)findViewById(R.id.topname);        
 	     myTextView.setText("我的收藏"); 
 	     
-	     back = (Button) findViewById(R.id.back01);  
+	     back = (LinearLayout) findViewById(R.id.back00);  
 	     back.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View arg0) {

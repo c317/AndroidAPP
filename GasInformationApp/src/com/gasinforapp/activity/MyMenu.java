@@ -16,7 +16,7 @@ import com.gasinforapp.config.MyConfig;
 
 public class MyMenu extends Activity {
 
-	private Button back;
+	private LinearLayout back;
     private TextView myTextView;  
     private LinearLayout ex;
     private LinearLayout account;
@@ -33,7 +33,7 @@ public class MyMenu extends Activity {
 		 myTextView = (TextView)findViewById(R.id.topname);        
 	     myTextView.setText("我的"); 
 	     
-	     back = (Button) findViewById(R.id.back01);  
+	     back = (LinearLayout) findViewById(R.id.back00);  
 	     back.setOnClickListener(new OnClickListener() {
 
 				public void onClick(View arg0) {

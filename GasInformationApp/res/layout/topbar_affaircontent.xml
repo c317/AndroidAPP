@@ -17,8 +17,7 @@
         android:layout_centerVertical="true"
         android:orientation="horizontal" >
 
-       <Button
-             android:id="@+id/back01"
+       <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/action_back"
@@ -64,7 +63,7 @@
         android:background="#00000000"
         android:textColor="#00BFFF"
         android:textSize="18sp"
-        android:text="+" />
+        android:text=" " />
         
     </LinearLayout>
 

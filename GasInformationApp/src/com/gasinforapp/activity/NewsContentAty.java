@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -24,7 +25,7 @@ public class NewsContentAty extends Activity {
 	private TextView tvsrc;
 	private TextView tvpubtime;
 	private TextView tvcontent;
-	private Button back;
+	private LinearLayout back;
 	private int newsId;
 	private LinearLayout collect;
 	private LinearLayout share;
@@ -38,17 +39,18 @@ public class NewsContentAty extends Activity {
 		tvsrc = (TextView) findViewById(R.id.tvsrc);
 		tvpubtime = (TextView) findViewById(R.id.tvpubtime);
 		tvcontent = (TextView) findViewById(R.id.tvcontent);
-		back=(Button) findViewById(R.id.back01);
+		back=(LinearLayout) findViewById(R.id.back00);
 		dataBaseHelper = GasInforDataBaseHelper.getDatebaseHelper(NewsContentAty.this);
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		newsId = bundle.getInt("newsId");
 		getNewsContent(newsId);
 		
-		back=(Button) findViewById(R.id.back01);
+
 		back.setOnClickListener(new OnClickListener() {
-			
+			@Override
 			public void onClick(View arg0) {
+				/*back.setBackgroundColor(Color.parseColor("#F5F5DC"));*/
 				finish();
 			}
 		});

@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,7 +51,7 @@ public class GroupChatAty extends Activity {
 	/** the button trun to members list activity */
 	private Button getMembers;
 	/** the button return to the previous view */
-	private Button back;
+	private LinearLayout back;
 	/**
 	 * param about the groupid numbers in request ,it get data from
 	 * Fragment_group
@@ -111,7 +112,7 @@ public class GroupChatAty extends Activity {
 	private void findAllView() {
 		listView = (PullToRefreshListView) findViewById(R.id.mylv);
 		topname = (TextView) findViewById(R.id.topname);
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		getMembers = (Button) findViewById(R.id.getmembers);
 		editText = (EditText) findViewById(R.id.et_sendwords);
 		btn_sendword = (Button) findViewById(R.id.button_sendchat);

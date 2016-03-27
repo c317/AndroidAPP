@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,7 +32,7 @@ import com.gasinforapp.net.ManageMembers.SuccessCallback;
 
 public class AddMemberAty extends Activity {
 	/** the button return to the previous view */
-	private Button back;
+	private LinearLayout back;
 	/** group id */
 	private int groupid;
 	/** edittext written account */
@@ -55,7 +56,7 @@ public class AddMemberAty extends Activity {
 
 		eaccount = (EditText) findViewById(R.id.account);
 		addbtn = (Button) findViewById(R.id.btn_add);
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		setOnListener();
 		
 		lvcheck = (ListView) findViewById(R.id.listview);

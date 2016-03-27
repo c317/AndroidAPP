@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +33,7 @@ public class AffairsRequestDetailAty extends Activity {
 	private TextView tvApplicant;
 	private TextView tvpubtime;
 	private TextView tvcontent;
-	private Button back;
+	private LinearLayout back;
 	private String itemId;
 	private String aftitle;
 	private String afstatus;
@@ -44,6 +45,7 @@ public class AffairsRequestDetailAty extends Activity {
 	private String afpicname;
 	private Button one;
 	private TextView myTextView;  
+	private int flag=0;
 
 
 	@Override
@@ -58,7 +60,7 @@ public class AffairsRequestDetailAty extends Activity {
 		tvDepartment = (TextView) findViewById(R.id.tv_department);
 		tvpubtime = (TextView) findViewById(R.id.tv_pubtime);
 		tvcontent = (TextView) findViewById(R.id.tv_content);
-		back=(Button) findViewById(R.id.back01);
+		back=(LinearLayout) findViewById(R.id.back00);
 		one=(Button) findViewById(R.id.btn_more);
 		one.setText(" ");
 		Intent intent = getIntent();
@@ -125,11 +127,16 @@ public class AffairsRequestDetailAty extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
+				if(flag==0){
 				down(downloadURL + afpicurl);
 				MediaScannerConnection.scanFile(AffairsRequestDetailAty.this,
 						new String[] { path + afpicname }, null, null);
+				flag = 1;
+				btn_download.setText("打开附件");
+				}else{
 				Intent intent = MyIntent.getImageFileIntent(path+afpicname);
 				startActivity(intent);
+				}
 			}
 		});
 	}

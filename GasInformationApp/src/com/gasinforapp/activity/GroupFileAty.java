@@ -14,9 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gasinformationapp_101.R;
@@ -38,12 +41,13 @@ public class GroupFileAty extends Activity implements
 	private List<Data> datalist;
 	private int pageNum = 1;
 	private String groupid;
-
+	private TextView topname;
+	private Button back;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);	
-		setContentView(R.layout.tab_data);
+		setContentView(R.layout.group_file);
 		Intent intent = getIntent();
 		Bundle bundle = new Bundle();
 		bundle = intent.getExtras();
@@ -76,6 +80,8 @@ public class GroupFileAty extends Activity implements
 
 	private void init() {
 		// 得到控件
+		back = (Button) findViewById(R.id.back01);
+		topname = (TextView) findViewById(R.id.topname);
 		lvdata = (PullToRefreshListView)findViewById(R.id.mydata);
 		lvdata.setMode(Mode.BOTH);
 		datalist = new ArrayList<Data>();
@@ -93,7 +99,20 @@ public class GroupFileAty extends Activity implements
 		actualListView.setAdapter(adapter);
 		getDataList();
 	}
+	/** 配置topbar */
+	private void setTopbar() {
+		// 改topbar的名字
+		topname.setText("组群文件");
 
+		// 返回按钮
+		back.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
+		
+	}
 	private void getDataList() {
 		new GroupFileList(groupid, new GroupFileList.SuccessCallback() {
 			@SuppressWarnings("unchecked")

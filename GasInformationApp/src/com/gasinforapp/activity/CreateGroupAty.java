@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.gasinformationapp_101.R;
@@ -16,16 +18,24 @@ import com.gasinforapp.net.CreateGroup.FailCallback;
 import com.gasinforapp.net.CreateGroup.SuccessCallback;
 
 public class CreateGroupAty extends Activity {
-
+	private LinearLayout back;
 	private Button button;
 	private EditText et_groupName;
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_creategroup);
 		button = (Button) findViewById(R.id.button1);
+		back = (LinearLayout) findViewById(R.id.back00);
 		et_groupName = (EditText) findViewById(R.id.groupName);
-		button.setOnClickListener(new View.OnClickListener() {
+		
+		back.setOnClickListener(new OnClickListener() {
 
+			public void onClick(View arg0) {
+				finish();
+			}
+		});
+		
+		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				if(!TextUtils.isEmpty(et_groupName.getText())){										
 					new CreateGroup(MyConfig.getCachedUserid(CreateGroupAty.this)

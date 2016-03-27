@@ -31,7 +31,7 @@ public class NewsBySearchedAty extends Activity {
 	private TextView tvsrc;
 	private TextView tvpubtime;
 	private TextView tvcontent;
-	private Button back;
+	private LinearLayout back;
 	private int newsId;
 	private int moduleId;
 	private LinearLayout collect;
@@ -46,7 +46,7 @@ public class NewsBySearchedAty extends Activity {
 		tvsrc = (TextView) findViewById(R.id.tvsrc);
 		tvpubtime = (TextView) findViewById(R.id.tvpubtime);
 		tvcontent = (TextView) findViewById(R.id.tvcontent);
-		back=(Button) findViewById(R.id.back01);
+		back=(LinearLayout) findViewById(R.id.back00);
 		
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();

@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +44,7 @@ public class GroupMembersAty extends Activity {
 	private UserAdapter adapter;
 	private List<User> userList;
 	/** the button return to the previous view */
-	private Button back;
+	private LinearLayout back;
 	/**
 	 * param about the groupid numbers in request ,it get data from GroupChatAty
 	 */
@@ -86,7 +87,7 @@ public class GroupMembersAty extends Activity {
 		topname.setText("群成员");
 
 		// 返回按钮
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		back.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {

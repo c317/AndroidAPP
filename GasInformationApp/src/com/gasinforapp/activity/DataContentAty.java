@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -38,7 +39,7 @@ public class DataContentAty extends Activity {
 	private TextView tv_size;
 	private TextView tv_src;
 	private TextView tv_pubtime;
-	private Button back;
+	private LinearLayout back;
 	private int flag=0;
 	
 	private String pubtime;
@@ -52,7 +53,7 @@ public class DataContentAty extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.home_download);
-		back=(Button) findViewById(R.id.back01);
+		back=(LinearLayout) findViewById(R.id.back00);
 		Intent intent = getIntent();
 		Bundle bundle = intent.getExtras();
 		fileName = bundle.getString(MyConfig.KEY_DATA_FILENAME);

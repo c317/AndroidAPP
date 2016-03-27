@@ -94,6 +94,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="3dp"
                                 android:text="2016-01-10"
+                                android:minLines="1"
                                 android:textColor="#A6A6A6" />
                         </LinearLayout>
                     </LinearLayout>

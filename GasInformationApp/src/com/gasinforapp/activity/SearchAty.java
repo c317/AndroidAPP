@@ -25,6 +25,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,7 +34,7 @@ public class SearchAty extends Activity implements
 OnRefreshListener2<ListView> {
 	private static String TAG = "SearchAty";
 	
-	private Button back;
+	private LinearLayout back;
 
 	private EditText searchKey;
 	private PullToRefreshListView lvNews;
@@ -67,7 +68,7 @@ OnRefreshListener2<ListView> {
 				loadMessage();
 			}
 		});
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		back.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View arg0) {

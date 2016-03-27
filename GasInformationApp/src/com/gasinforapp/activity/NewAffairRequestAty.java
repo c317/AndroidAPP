@@ -27,6 +27,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,7 @@ public class NewAffairRequestAty extends Activity {
 	private MultiSpinner sn_approver;
 	private Button btn_addfile;
 	private Button btn_send;
-	private Button back;
+	private LinearLayout back;
 	private TextView tv_path;
 	private ImageView iv_file;
 	// 审批者列表
@@ -336,7 +337,7 @@ public class NewAffairRequestAty extends Activity {
 		sn_approver = (MultiSpinner) findViewById(R.id.sn_approver);
 		btn_addfile = (Button) findViewById(R.id.btn_addfile);
 		btn_send = (Button) findViewById(R.id.btn_more);
-		back = (Button) findViewById(R.id.back01);
+		back = (LinearLayout) findViewById(R.id.back00);
 		tv_path = (TextView) findViewById(R.id.tv_path);
 		iv_file = (ImageView) findViewById(R.id.iv_file);
 		btn_send.setText("发送");
